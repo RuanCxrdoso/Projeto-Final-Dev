@@ -3,8 +3,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const cors = require("cors");
 
 const app = express();
+
+// Habilita o CORS para todas as rotas
+app.use(cors());
 
 // models
 const User = require("./models/User");
