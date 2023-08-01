@@ -1,13 +1,13 @@
-import User from "./User";
 const mongoose = require("mongoose");
 
-const New = mongoose.model("User", {
+const News = mongoose.model("News", {
   image: String,
   title: String,
   conteudo: String,
-  autor: User,
-  coments: Array,
+  coments: [],
   catergoria: String,
+  data: String,
+  link: String,
 });
 
-module.exports = New;
+module.exports = News;

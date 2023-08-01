@@ -1,0 +1,21 @@
+[
+    {
+        "_id": "840c5036-e9a4-4110-8440-81b8a4f6d96b",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:3000/noticias/insert",
+        "url": "http://localhost:3000/noticias/insert",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2023-08-01T19:33:24.456Z",
+        "modified": "2023-08-01T19:38:08.910Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\r\n  \"image\": \"https://istoe.com.br/wp-content/uploads/2020/07/tela-the-starry-night-noite-estrelada-de-van-gogh.jpg\",\r\n  \"title\": \"O que é arte ?\",\r\n  \"conteudo\": \"habilidade ou disposição dirigida para a execução de uma finalidade prática ou teórica, realizada de forma consciente, controlada e racional.\",\r\n  \"catergoria\": \"Arte\",\r\n  \"data\": \"01/01/2001\",\r\n  \"link\": \"google.com\"\r\n}",
+            "form": []
+        },
+        "tests": []
+    }
+]

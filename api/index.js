@@ -12,6 +12,7 @@ app.use(cors());
 
 // models
 const User = require("./models/User");
+const News = require("./models/News");
 
 // Config JSON response
 app.use(express.json());
@@ -137,6 +138,61 @@ app.post("/login", async (req, res) => {
     res
       .status(500)
       .json({ msg: "Algo de errado aconteceu, tente novamente mais tarde!" });
+  }
+});
+
+app.get("/noticias", async (req, res) => {
+  try {
+    const noticias = await News.find().sort({ data: -1 }); // Ordena por data decrescente
+    res.status(200).json(noticias);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro ao obter as notícias." });
+  }
+});
+
+//Register News Route
+app.post("/noticias/insert", async (req, res) => {
+  const { image, title, conteudo, coments, catergoria, data } = req.body;
+
+  if (!image) {
+    return res.status(422).json({ msg: "A imagem é obrigatorio!" });
+  }
+  if (!title) {
+    return res.status(422).json({ msg: "O titulo é obrigatorio!" });
+  }
+  if (!conteudo) {
+    return res.status(422).json({ msg: "O conteudo é obrigatorio!" });
+  }
+  if (!catergoria) {
+    return res.status(422).json({ msg: "É obrigatorio informar a catergoria" });
+  }
+  if (!data) {
+    return res.status(422).json({ msg: "É obrigatorio informar a data" });
+  }
+
+  const newsExist = await User.findOne({ title: title });
+
+  if (newsExist) {
+    return res.status(422).json({ msg: "Esta noticia já esta cadastrado" });
+  }
+
+  const news = new News({
+    image,
+    title,
+    conteudo,
+    coments,
+    catergoria,
+    data,
+  });
+
+  try {
+    await news.save();
+
+    res.status(201).json({ msg: "Noticia cadastrada com sucesso!" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Algo aconteceu de errado!" });
   }
 });
 
