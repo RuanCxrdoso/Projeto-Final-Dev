@@ -79,6 +79,43 @@ html {
   margin: 0 1em;
 }
 
+.aside-image {
+  margin-left: 8rem;
+  height: 20rem;
+  width: 28rem;
+  position: relative;
+  perspective: 1000px;
+}
+
+.aside-image img {
+  border-radius: .7rem;
+  height: 100%;
+  width: 100%;
+}
+
+.front, .back {
+  position: absolute;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: all .8s ease;
+}
+
+.front {
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+}
+
+.aside-image:hover .front {
+  transform: rotateY(-180deg);
+}
+
+.aside-image:hover .back {
+  transform: rotateY(0deg);
+}
+
 .footer {
   height: 100%;
   padding-bottom: 2rem;
