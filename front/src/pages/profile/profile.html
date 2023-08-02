@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
+    <title>True News</title>
     <link
-      rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
     />
     <link
       rel="stylesheet"
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="style.css" />
     <link
       rel="shortcut icon"
-      href="../../../../images/—Pngtree—vector globe icon_4186945.png"
+      href="../images/—Pngtree—vector globe icon_4186945.png"
       type="image/x-icon"
     />
   </head>
@@ -27,10 +27,10 @@
         id="navbar"
       >
         <div class="container py-3">
-          <a href="../../../index.html" class="navbar-brand primary-color">
+          <a href="index.html" class="navbar-brand primary-color">
             <img
-              src="../../../../images/—Pngtree—vector globe icon_4186945.png"
-              alt=""
+              src="../../../images/—Pngtree—vector globe icon_4186945.png"
+              alt="True News Logo"
             />
             <span>True News</span>
           </a>
@@ -48,35 +48,41 @@
           <div class="collapse navbar-collapse" id="navbar-items">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a
-                  href="../../../index.html"
-                  class="nav-link primary-color"
-                  aria-current="page"
+                <a href="index.html" class="nav-link active primary-color"
                   >Home</a
                 >
               </li>
               <li class="nav-item">
                 <a
-                  href="../../esportes/esporte.html"
+                  href="pages/esportes/esporte.html"
                   class="nav-link primary-color"
                   >Esporte</a
                 >
               </li>
               <li class="nav-item">
                 <a
-                  href="../../tecnologia/tecnologia.html"
+                  href="pages/tecnologia/tecnologia.html"
                   class="nav-link primary-color"
                   >Tecnologia</a
                 >
               </li>
               <li class="nav-item">
-                <a href="../../arte/arte.html" class="nav-link primary-color"
+                <a href="pages/arte/arte.html" class="nav-link primary-color"
                   >Arte</a
                 >
               </li>
               <li class="nav-item">
-                <a href="../../outros/" class="nav-link primary-color"
+                <a
+                  href="pages/outros/outros.html"
+                  class="nav-link primary-color"
                   >Outros</a
+                >
+              </li>
+              <li class="nav-item login-btn">
+                <a
+                  href="pages/autenticacao/login/login.html"
+                  class="nav-link primary-color"
+                  >Login</a
                 >
               </li>
             </ul>
@@ -86,48 +92,27 @@
     </header>
 
     <!-- Main Content -->
-    <main style="height: 100vh; margin-top: 12rem">
+    <main id="main" class="py-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
-            <div class="form-container">
-              <h3>Login</h3>
-              <form id="loginForm" action="#" method="post">
-                <div class="mb-3">
-                  <label for="email" class="form-label">E-mail</label>
-                  <input
-                    type="email"
-                    name="email"
-                    id="email"
-                    class="form-control"
-                    placeholder="Insira seu E-mail"
-                    spellcheck="true"
-                  />
-                </div>
-
-                <div class="mb-3">
-                  <label for="password" class="form-label">Senha</label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    class="form-control"
-                  />
-                </div>
-
-                <button type="submit" class="btn btn-primary">Enviar</button>
-              </form>
-            </div>
-          </div>
-
-          <div class="col-md-6">
-            <div class="aside-image">
-              <div class="front">
-                <img src="../../../../images/news3.jpg" alt="News" />
+          <div class="col-md-6 offset-md-3">
+            <div class="card">
+              <div class="img-box">
+                <!-- You can add a profile picture here if needed -->
+                <!-- <img src="path_to_profile_picture.jpg" class="card-img-top" alt="Profile Picture"> -->
               </div>
+              <div class="card-body">
+                <h3 class="card-title">User Profile</h3>
+                <div class="profile-info">
+                  <p><strong>Name:</strong> <span id="user-name"></span></p>
+                  <p><strong>Email:</strong> <span id="user-email"></span></p>
+                  <!-- Add more user data fields as needed -->
 
-              <div class="back">
-                <img src="../../../../images/news4.jpg" alt="News" />
+                  <!-- Logout button -->
+                  <button id="logout-button" class="btn btn-danger">
+                    Logout
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -136,8 +121,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-      <div class="footer-top">
+    <footer class="footer bg-dark-color">
+      <div class="footer-top text-light">
         <h3>True News</h3>
         <div>
           <i class="bi bi-facebook"></i>
@@ -146,7 +131,7 @@
         </div>
       </div>
 
-      <div class="footer-main">
+      <div class="footer-main text-secondary-color">
         <div class="footer-contact">
           <h3>Formas de contato</h3>
           <div>
@@ -174,7 +159,12 @@
       </div>
     </footer>
 
-    <script src="./script.js" type="module"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript Imports -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="script.js" type="module"></script>
   </body>
 </html>

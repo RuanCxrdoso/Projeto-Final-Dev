@@ -23,8 +23,10 @@ function lidarComEnvioFormulario(evento) {
   })
     .then((resposta) => resposta.json())
     .then((dados) => {
-      // Lidar com a resposta da sua API, se necessário
-      console.log(dados);
+      localStorage.setItem("token", dados.token);
+      console.log("Usuário logado com sucesso!");
+      // Redirecione o usuário para a página desejada após o login
+      window.location.href = "/front/src/index.html";
     })
     .catch((erro) => {
       // Lidar com quaisquer erros que ocorreram durante o fetch

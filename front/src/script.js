@@ -1,3 +1,6 @@
+import validation from "./scripts/validation.js";
+const token = localStorage.getItem("token");
+
 function renderizarCards(noticias) {
   const cardsBox = document.getElementById("cards-box");
 
@@ -39,15 +42,31 @@ function renderizarCards(noticias) {
 }
 
 function obterDadosNoticias() {
-  fetch("http://localhost:3000/noticias")
-    .then((resposta) => resposta.json())
-    .then((noticias) => {
-      console.log(noticias);
-      renderizarCards(noticias);
-    })
-    .catch((erro) => {
-      console.error("Erro:", erro);
-    });
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    fetch("http://localhost:3000/noticias")
+      .then((resposta) => resposta.json())
+      .then((noticias) => {
+        console.log(noticias);
+        renderizarCards(noticias);
+      })
+      .catch((erro) => {
+        console.error("Erro:", erro);
+      });
+  }
+  return;
 }
 
+const profileButton = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    const loginBtn = document.getElementById("loginBtn");
+    loginBtn.textContent = "Profile";
+    loginBtn.href =
+      "http://127.0.0.1:5500/front/src/pages/profile/profile.html"; // Substitua pela URL completa da notícia
+  }
+};
+
 obterDadosNoticias();
+profileButton();
