@@ -7,13 +7,23 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
+main {
+  height: 100%;
+  padding-top: 12rem;
+  background-image: linear-gradient(180deg, #e9e9e9, #afafaf);
+  padding-bottom: 5rem;
+}
+
 h3, p {
   cursor: default;
   font-family: Poppins, sans-serif;
 }
 
 a {
-  font-family: Poppins, sans-serif;
   cursor: pointer;
 }
 
@@ -21,29 +31,8 @@ a {
   background-color: #fff;
 }
 
-.bg-secondary-color {
-  background-color: #ece8ea;
-}
-
-.bg-dark-color {
-  background-color: #050505;
-}
-
 .primary-color {
   color: #050505;
-}
-
-.secondary-color {
-  color: #7a7a7a;
-}
-
-html {
-  height: 100%;
-}
-
-main {
-  height: 100vh;
-  margin-top: 12rem;
 }
 
 #navbar {
@@ -76,6 +65,7 @@ main {
   justify-content: flex-end;
   width: 100%;
 }
+
 #navbar-items .nav-item {
   margin: 0 1em;
 }
