@@ -41,6 +41,12 @@ html {
   height: 100%;
 }
 
+main {
+  height: 100%;
+  padding-top: 12rem;
+  background-color: #dfdfdf;
+}
+
 #navbar {
   border-bottom: 1px solid #7a7a7a;
 }
@@ -73,6 +79,52 @@ html {
 }
 #navbar-items .nav-item {
   margin: 0 1em;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.cards-container {
+  padding-top: 5rem;
+  padding-bottom: 10rem;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 2rem;
+}
+
+.card {
+  width: 20rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+}
+
+.img-box {
+  overflow: hidden;
+}
+
+.card-img-top {
+  transition: .4s;
+}
+
+.card-img-top:hover {
+  scale: 120%;
+}
+
+.card a {
+  text-decoration: none;
+  color: black;
+  background-color: #acacac;
+  border: none;
+  border-radius: 5px;
+  padding: 8px;
+  transition: .4s;
+}
+
+.card a:hover {
+  color: #acacac;
+  background-color: black;
 }
 
 .login-btn {

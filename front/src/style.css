@@ -41,6 +41,13 @@ html {
   height: 100%;
 }
 
+main {
+  height: 100%;
+  padding-top: 12rem;
+  background-color: #dfdfdf;
+  padding-bottom: 5rem;
+}
+
 #navbar {
   border-bottom: 1px solid #7a7a7a;
 }
@@ -84,13 +91,6 @@ html {
   transition: .4s;
 }
 
-#main {
-  height: 100%;
-  padding-top: 130px;
-  background-color: #dfdfdf;
-  padding-bottom: 5rem;
-}
-
 #cards-box {
   display: flex;
   flex-flow: row wrap;
@@ -100,11 +100,12 @@ html {
 
 .card {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+  width: 20rem;
 }
 
 .card img {
   height: 100%;
-  transition: .4s ease;
+  transition: .4s;
 }
 
 .card img:hover {
