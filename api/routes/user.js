@@ -8,5 +8,6 @@ router.get("/:id", checkToken, userController.findById);
 router.post("/login", userController.login);
 router.get("/", userController.findAll);
 router.delete("/:id", userController.remove);
+router.get("/profile", checkToken, userController.profile);
 
 module.exports = router;

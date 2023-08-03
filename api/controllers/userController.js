@@ -103,3 +103,25 @@ exports.findById = async (req, res) => {
 
   res.status(200).json({ user });
 };
+
+exports.profile = async (req, res) => {
+  const token = req.headers["authorization"].split(" ")[1];
+  const secret = process.env.SECRET;
+
+  try {
+    // Verify the token to get the user ID
+    const decodedToken = jwt.verify(token, secret);
+    const userId = decodedToken.id;
+
+    // Get the user's data using the ID from the token
+    const user = await User.findById(userId, "-password");
+
+    if (!user) {
+      return res.status(404).json({ msg: "Usuário não encontrado!" });
+    }
+
+    res.status(200).json({ user });
+  } catch (err) {
+    res.status(400).json({ msg: "O Token é inválido!" });
+  }
+};
