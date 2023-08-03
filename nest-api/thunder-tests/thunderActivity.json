@@ -17,5 +17,24 @@
             "form": []
         },
         "tests": []
+    },
+    {
+        "_id": "05d77a14-184a-4b7d-890a-ccd50eae2a62",
+        "colId": "history",
+        "containerId": "",
+        "name": "http://localhost:3000/users",
+        "url": "http://localhost:3000/users",
+        "method": "POST",
+        "sortNum": 0,
+        "created": "2023-08-03T02:31:00.535Z",
+        "modified": "2023-08-03T02:31:00.535Z",
+        "headers": [],
+        "params": [],
+        "body": {
+            "type": "json",
+            "raw": "{\r\n  \"name\": \"Cardoso\",\r\n  \"email\": \"cardoso@teste.com.br\",\r\n  \"password\": \"123456\"\r\n}",
+            "form": []
+        },
+        "tests": []
     }
 ]

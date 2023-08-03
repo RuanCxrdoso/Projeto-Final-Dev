@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const News = mongoose.model("News", {
-  image: String,
+  src: String,
   title: String,
   conteudo: String,
   coments: [],

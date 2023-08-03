@@ -14,7 +14,7 @@ function lidarComEnvioFormulario(evento) {
   };
 
   // Enviar os dados para a sua API usando fetch
-  fetch("http://localhost:3000/login", {
+  fetch("http://localhost:3000/users/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
