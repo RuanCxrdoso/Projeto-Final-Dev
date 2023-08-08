@@ -78,6 +78,15 @@ a {
   transition: .4s;
 }
 
+.main-box {
+  margin: 0 auto;
+  width: 94vw;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+}
+
 .titulo {
   text-align: center;
 }
@@ -86,7 +95,7 @@ a {
   padding-top: 5rem;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: stretch;
 }
 

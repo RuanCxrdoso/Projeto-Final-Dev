@@ -77,9 +77,12 @@ a {
   transition: .4s;
 }
 
-/* .container-sm {
-  width: 60%;
-} */
+.main-box {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+}
 
 .footer {
   height: 100%;

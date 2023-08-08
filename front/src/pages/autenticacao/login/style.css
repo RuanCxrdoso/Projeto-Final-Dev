@@ -70,9 +70,25 @@ a {
   margin: 0 1em;
 }
 
+.main-box {
+  width: 100vw;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+  margin-bottom: 5rem;
+}
+
+.content-box {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .aside-image {
-  margin-top: 1.5rem;
-  margin-left: 8rem;
+  /* margin-top: 1.5rem; */
+  margin-left: 5rem;
   height: 20rem;
   width: 33rem;
   position: relative;
