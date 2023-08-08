@@ -2,7 +2,8 @@ import validation from "./scripts/validation.js";
 const token = localStorage.getItem("token");
 
 function renderizarCards(noticias) {
-  const cardsBox = document.getElementById("cards-box");
+  const cardsContainer = document.querySelector(".cards-container");
+  cardsContainer.textContent = ""; // Limpa o conteúdo anterior da div
 
   noticias.forEach((noticia) => {
     const card = document.createElement("div");
@@ -12,7 +13,7 @@ function renderizarCards(noticias) {
     const imgBox = document.createElement("div");
     imgBox.className = "img-box";
     const img = document.createElement("img");
-    img.src = noticia.image;
+    img.src = noticia.src;
     img.className = "card-img-top";
     img.alt = noticia.title;
     imgBox.appendChild(img);
@@ -37,7 +38,7 @@ function renderizarCards(noticias) {
     card.appendChild(imgBox);
     card.appendChild(cardBody);
 
-    cardsBox.appendChild(card);
+    cardsContainer.appendChild(card);
   });
 }
 

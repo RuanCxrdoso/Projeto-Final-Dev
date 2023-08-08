@@ -4,17 +4,44 @@
         "colId": "history",
         "containerId": "",
         "name": "http://localhost:3000/noticias/insert",
-        "url": "http://localhost:3000/noticias/insert",
+        "url": "http://localhost:3000/noticias",
         "method": "POST",
         "sortNum": 0,
         "created": "2023-08-01T19:33:24.456Z",
-        "modified": "2023-08-01T19:38:08.910Z",
+        "modified": "2023-08-03T20:36:02.985Z",
         "headers": [],
         "params": [],
         "body": {
-            "type": "json",
-            "raw": "{\r\n  \"image\": \"https://istoe.com.br/wp-content/uploads/2020/07/tela-the-starry-night-noite-estrelada-de-van-gogh.jpg\",\r\n  \"title\": \"O que é arte ?\",\r\n  \"conteudo\": \"habilidade ou disposição dirigida para a execução de uma finalidade prática ou teórica, realizada de forma consciente, controlada e racional.\",\r\n  \"catergoria\": \"Arte\",\r\n  \"data\": \"01/01/2001\",\r\n  \"link\": \"google.com\"\r\n}",
-            "form": []
+            "type": "formdata",
+            "raw": "",
+            "form": [
+                {
+                    "name": "title",
+                    "value": "Cristiano Zanin toma posse como novo ministro do Supremo Tribunal Federal"
+                },
+                {
+                    "name": "conteudo",
+                    "value": "O ministro Cristiano Zanin tomou posse nesta quinta-feira (3) como novo ministro do Supremo Tribunal Federal (STF) em cerimônia na Corte. Indicado pelo presidente Luiz Inácio Lula da Silva, ele vai ocupar a cadeira deixada pelo ministro Ricardo Lewandowski, que se aposentou em abril."
+                },
+                {
+                    "name": "catergoria",
+                    "value": "Política"
+                },
+                {
+                    "name": "data",
+                    "value": "03/08/2023"
+                },
+                {
+                    "name": "link",
+                    "value": "https://www.google.com/search?q=Cristiano+Zanin+toma+posse+como+novo+ministro+do+Supremo+Tribunal+Federal&tbm=isch&ved=2ahUKEwiwutHBqsGAAxXDkZUCHX0sAB8Q2-cCegQIABAA&oq=Cristiano+Zanin+toma+posse+como+novo+ministro+do+Supremo+Tribunal+Federal&gs_lcp=CgNpbWcQAzoKCAAQigUQsQMQQzoICAAQgAQQsQM6BQgAEIAEUJADWJADYI4GaABwAHgAgAGFAYgBhwKSAQMwLjKYAQCgAQGqAQtnd3Mtd2l6LWltZ8ABAQ&sclient=img&ei=fw7MZPD-C8Oj1sQP_diA-AE&bih=759&biw=1399&client=opera-gx&hs=IEj#imgrc=148AX83PdjRtKM"
+                }
+            ],
+            "files": [
+                {
+                    "name": "file",
+                    "value": "..\\..\\..\\..\\..\\..\\..\\Downloads\\criszanin.jpg"
+                }
+            ]
         },
         "tests": []
     },

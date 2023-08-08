@@ -2,6 +2,17 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
+//Get All Users Route
+exports.findAll = async (req, res) => {
+  try {
+    const users = await User.find().sort({ data: -1 }); // Ordena por data decrescente
+    res.status(200).json(users);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro ao obter as notícias." });
+  }
+};
+
 //Register Route
 exports.create = async (req, res) => {
   try {
