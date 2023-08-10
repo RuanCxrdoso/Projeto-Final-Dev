@@ -4,9 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>True News</title>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+
   <link rel="stylesheet" href="style.css">
   <script src="script.js" type="module"></script>
 </head>
@@ -16,7 +20,7 @@
     <nav class="navbar navbar-expand-lg fixed-top bg-primary-color" id="navbar">
       <div class="container py-3">
           <a href="index.html" class="navbar-brand primary-color">
-              <img src="../images/—Pngtree—vector globe icon_4186945.png" alt="">
+              <img src="../images/—Pngtree—vector globe icon_4186945.png" alt="news">
               <span>True News</span>
           </a>
           <button 
@@ -61,7 +65,7 @@
 
   <!-- Main Content -->
   <main>
-    <div class="container-fluid">
+    <div class="main-box">
 
       <h3 class="titulo">As últimas notícias você encontra aqui !</h3>
 
@@ -105,7 +109,110 @@
 
       </div>
 
+      <div class="second-box">
+    
+          <div class="content">
+            <div class="box-img"><img src="../images/—Pngtree—vector globe icon_4186945.png" alt="logo" class="brand"></div>
+            <h3>True News, distruibuindo informações desde 2010</h3>
+            <p>
+              '' Desde nossa fundação em 2010, a True News tem trilhado uma jornada impressionante. Comprometidos em fornecer informações precisas e imparciais, rapidamente nos destacamos como uma fonte confiável de notícias.
+
+              Nos primeiros anos, abraçamos a revolução digital, introduzindo abordagens inovadoras para a narrativa de notícias. Adotamos formatos interativos e envolventes, conquistando uma audiência crescente em meio à transformação do cenário midiático.
+              
+              Enfrentando os desafios da era da desinformação, mantivemos nossa firmeza no compromisso com a veracidade. Investimos em equipes de verificação de fatos e tecnologias de detecção de informações falsas, protegendo nossa integridade jornalística.
+              
+              Ao longo dos anos, expandimos nossas operações globalmente, formando parcerias estratégicas e diversificando nossa cobertura de tópicos. Política, ciência, cultura e economia tornaram-se partes fundamentais de nossa abordagem multifacetada.
+              
+              Em 2023, a True News não apenas sobrevive, mas prospera. Aproveitando o poder da inteligência artificial, oferecemos análises mais profundas e insights perspicazes. Nossa trajetória é uma prova de que o jornalismo comprometido com a verdade pode não apenas sobreviver na era digital, mas também inspirar confiança duradoura em meio à enxurrada de informações. ''
+            </p>
+            <div class="ceo"><p>de Tal, Fulano - CEO True News</p></div>
+        </div>
+
+        <div class="box-carousel">
+
+          <div class="carousel-title">
+            <h3>Nossos maiores parceiros !</h3>
+          </div>
+
+          <div class="splide">
+            <div class="splide__track">
+              <div class="splide__list">
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/TITAN.jpeg" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/google.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/nytimes.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/cnn.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/wiki.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/bbc.jpg" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/foxNews.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/uol.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/wpp.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/gpt.png" alt="news">
+                  </div>
+                </div>
+
+                <div class="splide__slide">
+                  <div class="carousel-img">
+                    <img src="../images/bing.jpeg" alt="news">
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
+
   </main>
   
   <!-- Footer -->
@@ -146,5 +253,17 @@
       </div>
     </div>
   </footer>
+  
+  <!-- script do carrossel -->
+  <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+  <script>
+    var splide = new Splide( '.splide', {
+      type   : 'loop',
+      perPage: 4,
+      perMove: 1,
+    } );
+
+    splide.mount();
+  </script>
 </body>
 </html>

@@ -113,6 +113,50 @@ a {
   margin-left: 1rem;
 }
 
+
+/*  Comentários  */
+
+.user-comment {
+  border: 1px solid rgba(0, 0, 0, 0.253);
+  border-radius: 1rem;
+  padding: .5rem 1rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(4rem);
+  transition: opacity 1.5s, transform 1s;
+}
+
+.user-comment p {
+  margin-bottom: 0rem;
+}
+
+.name-comment {
+  font-family: Poppins, sans-serif;
+  font-size: 1.1rem;
+  margin: 1rem 1rem;
+}
+
+.comment {
+  text-align: justify;
+  font-style: italic;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.103);
+}
+
+.time {
+  text-align: end;
+  margin-bottom: 0rem;
+}
+
+#floatingTextarea {
+  height: 3rem;
+  transition: .3s;
+}
+
+#floatingTextarea:focus {
+  height: 6rem;
+}
+
 .footer {
   height: 100%;
   padding-bottom: 2rem;
