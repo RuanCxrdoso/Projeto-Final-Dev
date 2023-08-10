@@ -4,10 +4,8 @@ const userController = require("../controllers/userController");
 const checkToken = require("../middlewares/checkToken");
 
 router.post("/", userController.create);
-router.get("/:id", checkToken, userController.findById);
-router.post("/login", userController.login);
 router.get("/", userController.findAll);
-router.delete("/:id", userController.remove);
-router.get("/profile", checkToken, userController.profile);
+router.post("/login", userController.login);
+router.get("/validation", userController.validation);
 
 module.exports = router;

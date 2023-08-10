@@ -1,5 +1,5 @@
-import validation from "./scripts/validation.js";
 const token = localStorage.getItem("token");
+import validation from "./scripts/validation.js";
 
 function renderizarCards(noticias) {
   const cardsContainer = document.querySelector(".cards-container");
@@ -42,32 +42,39 @@ function renderizarCards(noticias) {
   });
 }
 
-function obterDadosNoticias() {
-  const token = localStorage.getItem("token");
-
+function renderItensAuth() {
+  console.log(token);
   if (token) {
-    fetch("http://localhost:3000/noticias")
-      .then((resposta) => resposta.json())
-      .then((noticias) => {
-        console.log(noticias);
-        renderizarCards(noticias);
+    fetch("http://localhost:3000/users/validation", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`, // Enviar o token no cabeçalho Authorization
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.isAuthenticated) {
+          const loginBtn = document.getElementById("loginBtn");
+          loginBtn.textContent = `${data.name}`;
+          loginBtn.href = "/front/src/pages/profile/profile.html";
+          fetch("http://localhost:3000/noticias")
+            .then((resposta) => resposta.json())
+            .then((noticias) => {
+              console.log(noticias);
+              renderizarCards(noticias);
+            })
+            .catch((erro) => {
+              console.error("Erro:", erro);
+            });
+        } else {
+          localStorage.removeItem("token");
+        }
       })
-      .catch((erro) => {
-        console.error("Erro:", erro);
+      .catch((error) => {
+        console.error("Erro ao verificar autenticação:", error);
+        // Lidar com erros, como redirecionar para uma página de erro
       });
   }
-  return;
 }
 
-const profileButton = () => {
-  const token = localStorage.getItem("token");
-  if (token) {
-    const loginBtn = document.getElementById("loginBtn");
-    loginBtn.textContent = "Profile";
-    loginBtn.href =
-      "http://127.0.0.1:5500/front/src/pages/profile/profile.html"; // Substitua pela URL completa da notícia
-  }
-};
-
-obterDadosNoticias();
-profileButton();
+renderItensAuth();

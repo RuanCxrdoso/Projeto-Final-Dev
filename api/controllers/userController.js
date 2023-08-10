@@ -2,17 +2,6 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-//Get All Users Route
-exports.findAll = async (req, res) => {
-  try {
-    const users = await User.find().sort({ data: -1 }); // Ordena por data decrescente
-    res.status(200).json(users);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ msg: "Erro ao obter as notícias." });
-  }
-};
-
 //Register Route
 exports.create = async (req, res) => {
   try {
@@ -53,11 +42,14 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.remove = async (req, res) => {
+//Get All Users Route
+exports.findAll = async (req, res) => {
   try {
+    const users = await User.find().sort({ data: -1 }); // Ordena por data decrescente
+    res.status(200).json(users);
   } catch (err) {
-    console.log(err);
-    res.status(500).json({ msg: "Algo aconteceu de errado!" });
+    console.error(err);
+    res.status(500).json({ msg: "Erro os dados de usuarios." });
   }
 };
 
@@ -104,39 +96,30 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.update = async (req, res) => {};
-
-exports.findById = async (req, res) => {
-  const id = req.params.id;
-
-  // check if user exists
-  const user = await User.findById(id, "-password");
-
-  if (!user) {
-    return res.status(404).json({ msg: "Usuário não encontrado!" });
-  }
-
-  res.status(200).json({ user });
-};
-
-exports.profile = async (req, res) => {
-  const token = req.headers["authorization"].split(" ")[1];
-  const secret = process.env.SECRET;
-
+exports.validation = async (req, res) => {
   try {
-    // Verify the token to get the user ID
-    const decodedToken = jwt.verify(token, secret);
-    const userId = decodedToken.id;
-
-    // Get the user's data using the ID from the token
-    const user = await User.findById(userId, "-password");
+    const token = req.headers.authorization.split(" ")[1];
+    const secret = process.env.SECRET;
+    const decoded = jwt.verify(token, secret);
+    const user = await User.findById(decoded.id);
 
     if (!user) {
-      return res.status(404).json({ msg: "Usuário não encontrado!" });
+      return res.status(422).json({ msg: "Usuario não encontrado!" });
     }
 
-    res.status(200).json({ user });
+    const name = user.name;
+    const email = user.email;
+
+    res.status(200).json({
+      msg: "Usuario autenticado com sucesso!",
+      isAuthenticated: true,
+      name,
+      email,
+    });
   } catch (err) {
-    res.status(400).json({ msg: "O Token é inválido!" });
+    console.log(err);
+    res
+      .status(500)
+      .json({ msg: "Algo de errado aconteceu!", isAuthenticated: false });
   }
 };
