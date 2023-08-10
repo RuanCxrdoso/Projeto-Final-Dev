@@ -53,9 +53,13 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.findAll = async (req, res) => {};
-
-exports.remove = async (req, res) => {};
+exports.remove = async (req, res) => {
+  try {
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Algo aconteceu de errado!" });
+  }
+};
 
 //Login Route
 exports.login = async (req, res) => {
