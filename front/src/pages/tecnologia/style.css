@@ -37,12 +37,18 @@ a {
 
 #navbar {
   border-bottom: 1px solid #7a7a7a;
+  transition: .5s;
 }
 #navbar :hover {
   color: #7a7a7a;
+  transition: .5s;
 }
 #navbar a.active {
   border-bottom: 1px solid #050505;
+}
+
+.nav-link {
+  transition: .5s;
 }
 
 .navbar-brand {
@@ -67,6 +73,10 @@ a {
 }
 #navbar-items .nav-item {
   margin: 0 1em;
+}
+
+.scroll {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.288);
 }
 
 .login-btn {

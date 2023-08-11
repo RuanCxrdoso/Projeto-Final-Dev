@@ -37,17 +37,25 @@ a {
 
 #navbar {
   border-bottom: 1px solid #7a7a7a;
+  transition: .5s;
 }
+
 #navbar :hover {
   color: #7a7a7a;
+  transition: .5s;
 }
 #navbar a.active {
   border-bottom: 1px solid #050505;
 }
 
+.nav-link {
+  transition: .5s;
+}
+
 .navbar-brand {
   display: flex;
   align-items: center;
+  transition: .5s;
 }
 
 .navbar-brand img {
@@ -70,6 +78,10 @@ a {
   margin: 0 1em;
 }
 
+.scroll {
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.288);
+}
+
 .login-btn {
   border: 1px solid #7a7a7a;
   border-radius: .5rem;
@@ -80,7 +92,7 @@ a {
 
 .main-box {
   margin: 0 auto;
-  width: 94vw;
+  width: 70vw;
   background-color: #fff;
   padding: 2rem;
   border-radius: 1rem;
@@ -89,6 +101,7 @@ a {
 
 .titulo {
   text-align: center;
+  padding-top: 3rem;
 }
 
 .cards-container {
@@ -97,11 +110,13 @@ a {
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: stretch;
+  row-gap: 4rem;
 }
 
 .card {
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
-  width: 20rem;
+  width: 25rem;
+  height: 37rem;
 }
 
 .card img {
@@ -164,7 +179,7 @@ a {
 }
 
 .content > p {
-  width: 70%;
+  width: 90%;
   margin: 2rem auto;
   font-family: 'Lato', sans-serif;
   font-style: italic;
@@ -208,11 +223,12 @@ a {
 
 .carousel-img {
   margin: 0 auto;
-  width: 12rem;
+  width: 10rem;
 }
 
 .carousel-img img {
   width: 100%;
+  border-radius: 50%;
 }
 
 .footer {
