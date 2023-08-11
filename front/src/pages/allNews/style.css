@@ -206,3 +206,19 @@ a {
   padding-right: 9rem;
   border-right: 1px solid rgba(212, 212, 212, 0.137);
 }
+
+.arrow-box {
+  position: fixed;
+  right: 0px;
+  top: 80%;
+  padding: 1rem;
+  border-radius: 50% 0 0 50%;
+  background-color: #7a7a7a9a;
+  opacity: 0;
+  transform: translateX(4rem);
+  transition: opacity 1.2s, transform 1s;
+}
+
+.arrow-box a {
+  font-size: 2rem;
+}

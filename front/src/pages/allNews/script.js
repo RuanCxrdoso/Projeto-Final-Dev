@@ -19,4 +19,19 @@ window.addEventListener('scroll', () => {
   } else if (screenWidth < 992) {
     navbar.style.height = 'auto'
   }
+
+  const scrollBtn = document.getElementById('arrow-box')
+
+  if (window.scrollY > 500) {
+    scrollBtn.style.opacity = '1'
+    scrollBtn.style.transform = 'translateX(0)'
+  } else {
+    scrollBtn.style.opacity = '0'
+    scrollBtn.style.transform = 'translateX(4rem)'
+  }
 })
+
+document.getElementById("arrow-box").addEventListener("click", function(e) {
+  e.preventDefault();
+  window.scrollBy(0, -3500)
+});
