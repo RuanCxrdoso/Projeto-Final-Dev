@@ -107,7 +107,7 @@ a {
   flex-flow: row wrap;
   justify-content: space-around;
   align-items: stretch;
-  row-gap: 4rem;
+  row-gap: 5rem;
 }
 
 .card {

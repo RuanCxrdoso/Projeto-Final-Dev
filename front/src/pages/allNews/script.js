@@ -35,3 +35,12 @@ document.getElementById("arrow-box").addEventListener("click", function(e) {
   e.preventDefault();
   window.scrollBy(0, -3500)
 });
+
+window.sr = ScrollReveal({ reset : true })
+
+ScrollReveal().reveal('.card', {
+  delay: 200,
+  rotate: {
+    x: 100
+  }
+})

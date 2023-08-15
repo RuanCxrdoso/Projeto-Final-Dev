@@ -7,10 +7,6 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
-}
-
 main {
   height: 100%;
   padding-top: 12rem;
@@ -92,10 +88,12 @@ a {
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+  overflow: hidden;
 }
 
 .titulo {
   text-align: center;
+  margin-top: 3rem;
 }
 
 .cards-container {
@@ -105,10 +103,11 @@ a {
   flex-flow: row wrap;
   justify-content: space-evenly;
   align-items: center;
-  gap: 2rem;
+  row-gap: 5rem;
 }
 
 .card {
+  visibility: hidden;
   width: 20rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
 }
@@ -200,4 +199,21 @@ a {
 .footer-item-1 {
   padding-right: 9rem;
   border-right: 1px solid rgba(212, 212, 212, 0.137);
+}
+
+.arrow-box {
+  position: fixed;
+  right: 0px;
+  top: 85%;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 50% 0 0 50%;
+  background-color: #7a7a7a9a;
+  opacity: 0;
+  transform: translateX(4rem);
+  transition: opacity 1.2s, transform 1s;
+}
+
+.arrow-box a {
+  font-size: 2rem;
 }
