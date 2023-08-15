@@ -116,3 +116,25 @@ document.getElementById("arrow-box").addEventListener("click", function(e) {
   e.preventDefault();
   window.scrollBy(0, -3500)
 });
+
+window.sr = ScrollReveal({ reset: true })
+
+ScrollReveal().reveal('.card', {
+  delay: 300,
+  rotate: {
+    x: 100
+  }
+});
+
+ScrollReveal().reveal('.content-box', {
+  delay: 300,
+  rotate: {
+    x: 100
+  }
+});
+ScrollReveal().reveal('.splide', {
+  delay: 300,
+  rotate: {
+    x: 100,
+  }
+});

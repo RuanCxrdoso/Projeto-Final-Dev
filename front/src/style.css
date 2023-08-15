@@ -7,10 +7,6 @@
   box-sizing: border-box;
 }
 
-html {
-  height: 100%;
-}
-
 main {
   height: 100%;
   padding-top: 12rem;
@@ -97,6 +93,7 @@ a {
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
+  overflow: hidden;
 }
 
 .titulo {
@@ -151,6 +148,7 @@ a {
 .second-box {
   margin: 7rem -2rem;
   background-color: #424242;
+  transform: skewY(-3deg);
 }
 
 .content {
@@ -159,6 +157,11 @@ a {
   margin: 0 auto;
   color: rgb(197, 197, 197);
   border-bottom: 1px solid rgba(0, 0, 0, 0.192);
+  transform: skewY(3deg);
+}
+
+.content-box {
+  visibility: hidden;
 }
 
 .box-img {
@@ -171,14 +174,14 @@ a {
   width: 100%;
 }
 
-.content > h3 {
+.content h3 {
   margin-top: 2rem;
   font-family: Poppins, sans-serif;
   font-size: 2rem;
   text-align: center;
 }
 
-.content > p {
+.content p {
   width: 90%;
   margin: 2rem auto;
   font-family: 'Lato', sans-serif;
@@ -187,18 +190,22 @@ a {
   line-height: 1.5rem;
 }
 
-.content  .ceo {
+.content .ceo {
   width: 70%;
   margin: 0 auto;
   text-align: end;
   font-style: italic;
-  /* color: rgba(197, 197, 197, 0.452); */
   color: #f2a90080;
 }
 
 .box-carousel {
   margin-top: 8rem;
   padding-bottom: 8rem;
+  transform: skewY(3deg);
+}
+
+.splide {
+  visibility: hidden;
 }
 
 .carousel-title {
@@ -296,7 +303,7 @@ a {
 .arrow-box {
   position: fixed;
   right: 0px;
-  top: 80%;
+  top: 85%;
   padding: 1rem;
   border-radius: 50% 0 0 50%;
   background-color: #7a7a7a9a;
