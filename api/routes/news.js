@@ -6,6 +6,7 @@ const checkToken = require("../middlewares/checkToken");
 
 router.get("/", newsController.findAll);
 router.post("/", upload.single("file"), newsController.create);
+router.get("/categoria", newsController.findByCategorie);
 //router.get("/:id", checkToken, userController.findById);
 //router.post("/login", userController.login);
 //router.delete("/:id", userController.remove);

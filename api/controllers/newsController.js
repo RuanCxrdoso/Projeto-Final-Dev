@@ -11,6 +11,25 @@ exports.findAll = async (req, res) => {
   }
 };
 
+exports.findByCategorie = async (req, res) => {
+  const excludedCategories = ["Esporte", "Tecnologia", "Arte"];
+  try {
+    const { categorie } = req.query;
+    if (categorie === "Outros") {
+      const news = await News.find({
+        catergoria: { $nin: excludedCategories },
+      });
+      res.status(200).json(news);
+    } else {
+      const news = await News.find({ catergoria: categorie });
+      res.status(200).json(news);
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro ao obter as notícias." });
+  }
+};
+
 exports.create = async (req, res) => {
   try {
     const { title, conteudo, coments, catergoria, data } = req.body;
