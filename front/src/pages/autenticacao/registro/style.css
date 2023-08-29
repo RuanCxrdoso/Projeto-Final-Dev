@@ -73,7 +73,7 @@ a {
 .main-box {
   width: 100vw;
   background-color: #fff;
-  margin-top: 8rem;
+  /* margin-top: 0rem; */
   padding: 2rem;
   border-radius: 1rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);

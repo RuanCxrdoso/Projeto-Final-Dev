@@ -190,12 +190,15 @@ a {
   line-height: 1.5rem;
 }
 
-.content .ceo {
-  width: 70%;
-  margin: 0 auto;
-  text-align: end;
+.ceo {
+  width: 100%;
+}
+
+.ceo > p {
+  width: 90%;
   font-style: italic;
   color: #f2a90080;
+  text-align: end;
 }
 
 .box-carousel {
