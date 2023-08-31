@@ -243,7 +243,7 @@ a {
 
 .footer {
   height: 100%;
-  padding-bottom: 2rem;
+  padding-bottom: .6rem;
   background-color: rgb(5, 5, 5);
   color: white;
 }
@@ -303,6 +303,24 @@ a {
   border-right: 1px solid rgba(212, 212, 212, 0.137);
 }
 
+.footer-colab > p {
+  font-size: .9rem;
+  text-align: center;
+  color: rgba(173, 173, 173, 0.363);
+  margin-top: 1.5rem;
+}
+
+.footer-colab a {
+  font-style: italic;
+  text-decoration: none;
+  color: rgba(173, 173, 173, 0.596);
+  transition: .3s;
+}
+
+.footer-colab a:hover {
+  font-size: .98rem;
+}
+
 .arrow-box {
   position: fixed;
   right: 0px;
@@ -312,9 +330,106 @@ a {
   background-color: #7a7a7a9a;
   opacity: 0;
   transform: translateX(4rem);
-  transition: opacity 1.2s, transform 1s;
+  transition: opacity 1.2s, transform .8s;
 }
 
 .arrow-box a {
   font-size: 2rem;
+}
+
+@media (max-width: 425px) {
+  .navbar {
+    width: 100vw;
+  }
+  .navbar > .container {
+    justify-content: space-between;
+  }
+  
+  main {
+    padding-top: 6rem;
+    background-image: none;
+    background-color: #fff;
+  }
+
+  .main-box {
+    border-radius: 0;
+    width: 100vw;
+    box-shadow: none;
+  }
+
+  .content {
+    width: 95%;
+  }
+
+  .content h3 {
+    font-size: 1.5rem;
+  }
+
+  .content p {
+    width: 100%;
+    line-height: 1.8rem;
+  }
+
+  .carousel-title h3 {
+    font-size: 1.5rem;
+  }
+  .splide {
+    width: 90%;
+  }
+
+  .carousel-img {
+    width: 5.5rem;
+  }
+
+  .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .footer-top {
+    width: 100%;
+    gap: 20%;
+  }
+
+  .footer-main {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 3rem;
+  }
+
+  .footer-contact {
+    width: 90%;
+    border: none;
+    padding-right: 0;
+  }
+
+  .footer-links {
+    width: 90%;
+  }
+
+  .footer-items {
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+
+  .footer-item-1 {
+    padding-right: 4rem;
+  }
+
+  .footer-colab {
+    align-self: center;
+    margin-top: 2rem;
+    width: 80%;
+  }
+
+  .arrow-box {
+    padding: .6rem;
+  }
+
+  .arrow-box a {
+    font-size: 1.6rem;
+  }
 }
