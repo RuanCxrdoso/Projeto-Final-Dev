@@ -108,7 +108,8 @@ a {
 }
 
 .notice {
-  visibility: hidden;
+  padding: 0 2rem;
+  margin-bottom: 2rem;
 }
 
 .notice p {
@@ -125,6 +126,11 @@ a {
 
 /*  Comentários  */
 
+.comments {
+  padding: 0 2rem;
+  margin-bottom: 2rem;
+}
+
 .user-comment {
   border: 1px solid rgba(0, 0, 0, 0.253);
   border-radius: 1rem;
@@ -133,6 +139,7 @@ a {
   opacity: 0;
   transform: translateY(4rem);
   transition: opacity 1.5s, transform 1s;
+  visibility: visible;
 }
 
 .user-comment p {

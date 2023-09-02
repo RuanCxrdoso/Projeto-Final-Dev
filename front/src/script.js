@@ -31,8 +31,15 @@ function renderizarCards(noticias) {
     cardBody.appendChild(data);
 
     const link = document.createElement("a");
-    link.href = noticia.link; // Substitua pela URL completa da notícia
     link.textContent = "Notícia Completa";
+    card.dataset.id = noticia._id; // Supondo que noticia.id contenha o ID único da notícia
+    card.addEventListener("click", () => {
+      const newsId = card.dataset.id; // Obtém o ID da notícia do atributo personalizado
+      const newsDetailURL = "/front/src/pages/news/news.html?id=" + newsId;
+      link.href = newsDetailURL; // Substitua pela URL completa da notícia
+      console.log(newsDetailURL);
+      //window.location.href = newsDetailURL; // Redireciona o usuário para a página de detalhes
+    });
     cardBody.appendChild(link);
 
     card.appendChild(imgBox);
@@ -79,62 +86,62 @@ function renderItensAuth() {
 
 renderItensAuth();
 
-window.addEventListener('scroll', () => {
-  const navbar = document.getElementById('navbar')
-  const navLinks = Array.from(document.getElementsByClassName('nav-link'))
-  const scroll = window.scrollY
-  let screenWidth = window.innerWidth
+window.addEventListener("scroll", () => {
+  const navbar = document.getElementById("navbar");
+  const navLinks = Array.from(document.getElementsByClassName("nav-link"));
+  const scroll = window.scrollY;
+  let screenWidth = window.innerWidth;
 
   if (scroll > 10 && screenWidth > 992) {
-    navbar.classList.add('scroll')
-    navbar.style.height = '65px'
+    navbar.classList.add("scroll");
+    navbar.style.height = "65px";
     navLinks.forEach((elem) => {
-      elem.style.fontSize = '14px'
-    })
+      elem.style.fontSize = "14px";
+    });
   } else if (scroll < 10 && screenWidth > 992) {
-    navbar.classList.remove('scroll')
-    navbar.style.height = '99px'
+    navbar.classList.remove("scroll");
+    navbar.style.height = "99px";
     navLinks.forEach((elem) => {
-      elem.style.fontSize = '16px'
-    })
+      elem.style.fontSize = "16px";
+    });
   } else if (screenWidth < 992) {
-    navbar.style.height = 'auto'
+    navbar.style.height = "auto";
   }
 
-  const scrollBtn = document.getElementById('arrow-box')
+  const scrollBtn = document.getElementById("arrow-box");
 
   if (window.scrollY > 1000) {
-    scrollBtn.style.opacity = '1'
-    scrollBtn.style.transform = 'translateX(.4rem)'
+    scrollBtn.style.opacity = "1";
+    scrollBtn.style.transform = "translateX(.4rem)";
   } else {
-    scrollBtn.style.opacity = '0'
-    scrollBtn.style.transform = 'translateX(4rem)'
+    scrollBtn.style.opacity = "0";
+    scrollBtn.style.transform = "translateX(4rem)";
   }
-})
+});
 
-document.getElementById("arrow-box").addEventListener("click", function(e) {
+document.getElementById("arrow-box").addEventListener("click", function (e) {
   e.preventDefault();
-  window.scrollBy(0, -10000)
+  window.scrollBy(0, -10000);
 });
 
-window.sr = ScrollReveal({ reset: true })
+window.sr = ScrollReveal({ reset: true });
 
-ScrollReveal().reveal('.card', {
-  delay: 300,
-  rotate: {
-    x: 100
-  }
-});
-
-ScrollReveal().reveal('.content-box', {
-  delay: 300,
-  rotate: {
-    x: 100
-  }
-});
-ScrollReveal().reveal('.splide', {
+ScrollReveal().reveal(".card", {
   delay: 300,
   rotate: {
     x: 100,
-  }
+  },
+});
+
+ScrollReveal().reveal(".content-box", {
+  delay: 300,
+  rotate: {
+    x: 100,
+  },
+});
+ScrollReveal().reveal(".splide", {
+  delay: 300,
+  rotate: {
+    x: 100,
+  },
 });
