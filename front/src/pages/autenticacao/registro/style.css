@@ -209,3 +209,196 @@ a {
 .footer-colab a:hover {
   font-size: .98rem;
 }
+
+@media (max-width: 425px) {
+  .navbar {
+    width: 100vw;
+  }
+  .navbar > .container {
+    justify-content: space-between;
+  }
+  
+  main {
+    padding-top: 50%;
+    background-image: none;
+    background-color: #fff;
+  }
+
+  .main-box {
+    border-radius: 0;
+    width: 100vw;
+    box-shadow: none;
+  }
+
+  .content-box {
+    flex-flow: column wrap;
+  }
+
+  .aside-image {
+    display: none;
+  }
+
+  .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .footer-top {
+    width: 100%;
+    gap: 20%;
+  }
+
+  .footer-main {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 3rem;
+  }
+
+  .footer-contact {
+    width: 90%;
+    border: none;
+    padding-right: 0;
+  }
+
+  .footer-links {
+    width: 90%;
+  }
+
+  .footer-items {
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+
+  .footer-item-1 {
+    padding-right: 4rem;
+  }
+
+  .footer-colab {
+    align-self: center;
+    margin-top: 2rem;
+    width: 80%;
+  }
+
+  .arrow-box {
+    padding: .6rem;
+  }
+
+  .arrow-box a {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .navbar {
+    width: 100vw;
+  }
+
+  main {
+    padding-top: 20%;
+    background-image: none;
+    background-color: #fff;
+  }
+
+  .main-box {
+    border-radius: 0;
+    width: 100vw;
+    box-shadow: none;
+  }
+
+  .content-box {
+    flex-flow: column wrap;
+    gap: 5rem;
+  }
+
+  .aside-box {
+    width: 100vw;
+  }
+
+  .aside-image {
+    margin: 0 auto;
+    width: 35rem;
+  }
+
+  .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .footer-top {
+    width: 100%;
+    gap: 40%;
+  }
+
+  .footer-main {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 3rem;
+  }
+
+  .footer-contact {
+    width: 90%;
+    border: none;
+    padding-right: 0;
+  }
+
+  .footer-links {
+    width: 90%;
+  }
+
+  .footer-items {
+    justify-content: space-around;
+  }
+
+  .footer-item-1 {
+    padding-right: 12rem;
+  }
+
+  .footer-colab {
+    align-self: center;
+    margin-top: 2rem;
+    width: 80%;
+  }
+
+  .arrow-box {
+    padding: .7rem;
+  }
+
+  .arrow-box a {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-box {
+    padding-bottom: 4rem;
+  }
+
+  .content-box {
+    flex-flow: column wrap;
+    align-items: center;
+    gap: 5rem;
+  }
+
+  .aside-box {
+    width: 100vw;
+  }
+
+  .aside-image {
+    margin: 0 auto;
+  }
+
+  .footer-main {
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  .footer-contact {
+    padding-right: 5rem;
+  }
+}
