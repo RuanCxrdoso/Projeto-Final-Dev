@@ -248,6 +248,10 @@ a {
   .navbar > .container {
     justify-content: space-between;
   }
+
+  .login-btn {
+    margin-top: .8rem !important;
+  }
   
   main {
     padding-top: 6rem;
@@ -356,6 +360,10 @@ a {
     padding-top: 6rem;
     background-image: none;
     background-color: #fff;
+  }
+
+  .login-btn {
+    margin-top: .8rem !important;
   }
 
   .main-box {
