@@ -114,7 +114,7 @@ window.addEventListener("scroll", () => {
 
   if (window.scrollY > 500) {
     scrollBtn.style.opacity = "1";
-    scrollBtn.style.transform = "translateX(0)";
+    scrollBtn.style.transform = "translateX(.4rem)";
   } else {
     scrollBtn.style.opacity = "0";
     scrollBtn.style.transform = "translateX(4rem)";
@@ -123,7 +123,7 @@ window.addEventListener("scroll", () => {
 
 document.getElementById("arrow-box").addEventListener("click", function (e) {
   e.preventDefault();
-  window.scrollBy(0, -3500);
+  window.scrollBy(0, -5000);
 });
 
 window.sr = ScrollReveal({ reset: true });

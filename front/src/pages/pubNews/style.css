@@ -145,3 +145,150 @@ a {
   padding-right: 9rem;
   border-right: 1px solid rgba(212, 212, 212, 0.137);
 }
+
+.footer-colab > p {
+  font-size: .9rem;
+  text-align: center;
+  color: rgba(173, 173, 173, 0.363);
+  margin-top: 1.5rem;
+}
+
+.footer-colab a {
+  font-style: italic;
+  text-decoration: none;
+  color: rgba(173, 173, 173, 0.596);
+  transition: .3s;
+}
+
+.footer-colab a:hover {
+  font-size: .98rem;
+}
+
+@media (max-width: 425px) {
+  .navbar {
+    width: 100vw;
+  }
+  .navbar > .container {
+    justify-content: space-between;
+  }
+
+  .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .footer-top {
+    width: 100%;
+    gap: 20%;
+  }
+
+  .footer-main {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 3rem;
+  }
+
+  .footer-contact {
+    width: 90%;
+    border: none;
+    padding-right: 0;
+  }
+
+  .footer-links {
+    width: 90%;
+  }
+
+  .footer-items {
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+
+  .footer-item-1 {
+    padding-right: 4rem;
+  }
+
+  .footer-colab {
+    align-self: center;
+    margin-top: 2rem;
+    width: 80%;
+  }
+
+  .arrow-box {
+    padding: .6rem;
+  }
+
+  .arrow-box a {
+    font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .navbar {
+    width: 100vw;
+  }
+
+  .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .footer-top {
+    width: 100%;
+    gap: 40%;
+  }
+
+  .footer-main {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 3rem;
+  }
+
+  .footer-contact {
+    width: 90%;
+    border: none;
+    padding-right: 0;
+  }
+
+  .footer-links {
+    width: 90%;
+  }
+
+  .footer-items {
+    justify-content: space-around;
+  }
+
+  .footer-item-1 {
+    padding-right: 12rem;
+  }
+
+  .footer-colab {
+    align-self: center;
+    margin-top: 2rem;
+    width: 80%;
+  }
+
+  .arrow-box {
+    padding: .7rem;
+  }
+
+  .arrow-box a {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .footer-main {
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  .footer-contact {
+    padding-right: 5rem;
+  }
+}

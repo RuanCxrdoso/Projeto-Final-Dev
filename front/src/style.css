@@ -357,6 +357,10 @@ a {
     box-shadow: none;
   }
 
+  .card {
+    height: 34rem;
+  }
+
   .content {
     width: 95%;
   }
@@ -374,11 +378,16 @@ a {
     font-size: 1.5rem;
   }
   .splide {
-    width: 90%;
+    width: 100%;
+    padding: 0 2.8rem;
+  }
+
+  .splide__slide {
+    padding-bottom: 1rem;
   }
 
   .carousel-img {
-    width: 5.5rem;
+    width: 4.5rem;
   }
 
   .footer {
@@ -431,5 +440,132 @@ a {
 
   .arrow-box a {
     font-size: 1.6rem;
+  }
+}
+
+@media (min-width: 426px) and (max-width: 768px) {
+  .navbar {
+    width: 100vw;
+  }
+
+  main {
+    padding-top: 6rem;
+    background-image: none;
+    background-color: #fff;
+  }
+
+  .main-box {
+    border-radius: 0;
+    width: 100vw;
+    box-shadow: none;
+  }
+
+  .card {
+    width: 20rem;
+  }
+
+  .content {
+    width: 95%;
+  }
+
+  .content h3 {
+    font-size: 1.5rem;
+  }
+
+  .content p {
+    width: 100%;
+    line-height: 1.8rem;
+  }
+
+  .splide {
+    width: 80%;
+    padding: 0 3rem;
+  }
+
+  .splide__slide {
+    padding-bottom: 1rem;
+  }
+
+  .carousel-img {
+    width: 85%;
+  }
+
+  .footer {
+    width: 100vw;
+    display: flex;
+    flex-flow: column wrap;
+  }
+
+  .footer-top {
+    width: 100%;
+    gap: 40%;
+  }
+
+  .footer-main {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 3rem;
+  }
+
+  .footer-contact {
+    width: 90%;
+    border: none;
+    padding-right: 0;
+  }
+
+  .footer-links {
+    width: 90%;
+  }
+
+  .footer-items {
+    justify-content: space-around;
+  }
+
+  .footer-item-1 {
+    padding-right: 12rem;
+  }
+
+  .footer-colab {
+    align-self: center;
+    margin-top: 2rem;
+    width: 80%;
+  }
+
+  .arrow-box {
+    padding: .7rem;
+  }
+
+  .arrow-box a {
+    font-size: 1.8rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-box {
+    width: 90%;
+  }
+
+  .card {
+    width: 23rem;
+  }
+
+  .splide {
+    width: 100%;
+    padding: 0 2rem;
+  }
+
+  .splide__slide {
+    padding-bottom: 1rem;
+  }
+
+  .footer-main {
+    width: 90vw;
+    margin: 0 auto;
+  }
+
+  .footer-contact {
+    padding-right: 5rem;
   }
 }

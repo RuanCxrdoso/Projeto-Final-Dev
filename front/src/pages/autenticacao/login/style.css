@@ -192,3 +192,21 @@ a {
   padding-right: 9rem;
   border-right: 1px solid rgba(212, 212, 212, 0.137);
 }
+
+.footer-colab > p {
+  font-size: .9rem;
+  text-align: center;
+  color: rgba(173, 173, 173, 0.363);
+  margin-top: 1.5rem;
+}
+
+.footer-colab a {
+  font-style: italic;
+  text-decoration: none;
+  color: rgba(173, 173, 173, 0.596);
+  transition: .3s;
+}
+
+.footer-colab a:hover {
+  font-size: .98rem;
+}

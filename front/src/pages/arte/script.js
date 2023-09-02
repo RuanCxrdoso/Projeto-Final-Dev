@@ -114,7 +114,7 @@ window.addEventListener("scroll", () => {
 
   if (window.scrollY > 300) {
     scrollBtn.style.opacity = "1";
-    scrollBtn.style.transform = "translateX(0)";
+    scrollBtn.style.transform = "translateX(.4rem)";
   } else {
     scrollBtn.style.opacity = "0";
     scrollBtn.style.transform = "translateX(4rem)";
