@@ -97,3 +97,16 @@ exports.create = async (req, res) => {
     res.status(500).json({ msg: "Algo aconteceu de errado!" });
   }
 };
+
+exports.findById = async (req, res) => {
+  try {
+    const id = req.params.id; // Extrai o 'id' dos parâmetros de rota
+    const news = await News.find({
+      _id: id,
+    });
+    res.status(200).json(news);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ msg: "Erro ao obter as notícias." });
+  }
+};

@@ -109,12 +109,14 @@ exports.validation = async (req, res) => {
 
     const name = user.name;
     const email = user.email;
+    const id = user._id;
 
     res.status(200).json({
       msg: "Usuario autenticado com sucesso!",
       isAuthenticated: true,
       name,
       email,
+      id,
     });
   } catch (err) {
     console.log(err);

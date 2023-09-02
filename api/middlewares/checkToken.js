@@ -9,9 +9,11 @@ function checkToken(req, res, next) {
 
     jwt.verify(token, secret);
 
+    // Se o token for válido, continue com a solicitação
     next();
   } catch (err) {
-    res.status(400).json({ msg: "O Token é inválido!" });
+    // Se o token for inválido, responda com erro 401
+    res.status(401).json({ msg: "Token inválido!" });
   }
 }
 

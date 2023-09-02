@@ -12,6 +12,7 @@ app.use(cors());
 // models
 const newsRouter = require("./routes/news");
 const userRouter = require("./routes/user");
+const commentsRouter = require("./routes/comments");
 
 // Config JSON response
 app.use(express.json());
@@ -20,6 +21,8 @@ app.use(express.json());
 app.use("/noticias", newsRouter);
 //User Routes
 app.use("/users", userRouter);
+//Comments Routes
+app.use("/comments", commentsRouter);
 
 // Open Route
 app.get("/", (req, res) => {
