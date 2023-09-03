@@ -211,6 +211,21 @@ a {
   font-size: .98rem;
 }
 
+.logo {
+  width: 1.8rem;
+  margin-bottom: 5px;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg); 
+    }
+}
+
 @media (max-width: 425px) {
   .navbar {
     width: 100vw;
