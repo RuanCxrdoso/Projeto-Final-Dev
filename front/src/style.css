@@ -141,8 +141,14 @@ a {
 }
 
 .card a:hover {
-  color: #acacac;
-  background-color: black;
+  color: #bdbaba;
+  background-color: rgb(20, 20, 20);
+}
+
+.card-body > h3 {
+  height: 5rem;
+  font-size: 1rem;
+  text-align: justify;
 }
 
 .second-box {
