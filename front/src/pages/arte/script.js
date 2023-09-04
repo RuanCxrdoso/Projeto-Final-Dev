@@ -45,11 +45,6 @@ function renderizarCards(noticias) {
   console.log(cardsContainer.textContent);
 }
 
-const categoria = "Arte"; // Coloque a categoria desejada aqui
-const url = `http://localhost:3000/noticias/categoria?categorie=${encodeURIComponent(
-  categoria
-)}`;
-
 function renderItensAuth() {
   console.log(token);
   if (token) {
@@ -65,12 +60,11 @@ function renderItensAuth() {
           const loginBtn = document.getElementById("loginBtn");
           loginBtn.textContent = `${data.name}`;
           loginBtn.href = "/front/src/pages/profile/profile.html";
-          fetch(url, {
+          fetch("http://localhost:3000/noticias/cat/Arte", {
             method: "GET",
           })
             .then((resposta) => resposta.json())
             .then((noticias) => {
-              console.log(noticias);
               renderizarCards(noticias);
             })
             .catch((erro) => {

@@ -1,93 +1,125 @@
-const token = localStorage.getItem("token");
-//import validation from "./scripts/validation.js";
+// Função para criar elementos com classe e atributos
+function createElement(tagName, className, attributes = {}) {
+  const element = document.createElement(tagName);
+  element.className = className;
 
-function renderizarCards(noticias) {
+  for (const attribute in attributes) {
+    element[attribute] = attributes[attribute];
+  }
+
+  return element;
+}
+
+// Função para renderizar os cards de notícias
+function renderNewsCards(news) {
   const cardsContainer = document.querySelector(".cards-container");
-  cardsContainer.textContent = ""; // Limpa o conteúdo anterior da div
+  cardsContainer.innerHTML = ""; // Limpa o conteúdo anterior da div
 
-  console.log(cardsContainer.textContent);
-
-  noticias.forEach((noticia) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.visibility = "visible";
-
-    const imgBox = document.createElement("div");
-    imgBox.className = "img-box";
-    const img = document.createElement("img");
-    img.src = noticia.src;
-    img.className = "card-img-top";
-    img.alt = noticia.title;
-    imgBox.appendChild(img);
-
-    const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
-
-    const titulo = document.createElement("h3");
-    titulo.textContent = noticia.title;
-    cardBody.appendChild(titulo);
-
-    const data = document.createElement("p");
-    data.textContent = noticia.data;
-    data.className = "date";
-    cardBody.appendChild(data);
-
-    const link = document.createElement("a");
-    link.href = noticia.link; // Substitua pela URL completa da notícia
-    link.textContent = "Notícia Completa";
-    cardBody.appendChild(link);
-
-    card.appendChild(imgBox);
-    card.appendChild(cardBody);
-
+  news.forEach((article) => {
+    const card = createNewsCard(article);
     cardsContainer.appendChild(card);
   });
-  console.log(cardsContainer.textContent);
 }
 
-const categoria = "Tecnologia"; // Coloque a categoria desejada aqui
-const url = `http://localhost:3000/noticias/categoria?categorie=${encodeURIComponent(
-  categoria
-)}`;
-
-function renderItensAuth() {
-  console.log(token);
-  if (token) {
-    fetch("http://localhost:3000/users/validation", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`, // Enviar o token no cabeçalho Authorization
-      },
+// Função para criar um card de notícia
+function createNewsCard(article) {
+  const card = createElement("div", "card");
+  card.style.visibility = "visible";
+  const imgBox = createElement("div", "img-box");
+  imgBox.appendChild(
+    createElement("img", "card-img-top", {
+      src: article.src,
+      alt: article.title,
     })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.isAuthenticated) {
-          const loginBtn = document.getElementById("loginBtn");
-          loginBtn.textContent = `${data.name}`;
-          loginBtn.href = "/front/src/pages/profile/profile.html";
-          fetch(url, {
-            method: "GET",
-          })
-            .then((resposta) => resposta.json())
-            .then((noticias) => {
-              console.log(noticias);
-              renderizarCards(noticias);
-            })
-            .catch((erro) => {
-              console.error("Erro:", erro);
-            });
-        } else {
-          localStorage.removeItem("token");
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao verificar autenticação:", error);
-        // Lidar com erros, como redirecionar para uma página de erro
-      });
-  }
-}
-renderItensAuth();
+  );
 
+  const cardBody = createElement("div", "card-body");
+  cardBody.appendChild(createElement("h3", "", { textContent: article.title }));
+  cardBody.appendChild(
+    createElement("p", "date", { textContent: article.data })
+  );
+  cardBody.appendChild(createLink("Notícia Completa", article.link));
+
+  card.appendChild(imgBox);
+  card.appendChild(cardBody);
+
+  return card;
+}
+
+// Função para criar um link
+function createLink(text, href) {
+  const link = createElement("a", "", { textContent: text, href: href });
+  return link;
+}
+
+// Função para atualizar o botão de login com o nome do usuário autenticado
+function updateLoginButton(name) {
+  const loginBtn = document.getElementById("loginBtn");
+  loginBtn.textContent = name;
+  loginBtn.href = "/front/src/pages/profile/profile.html";
+}
+
+// Função para remover o token de autenticação
+function removeAuthToken() {
+  localStorage.removeItem("token");
+}
+
+// Função para validar a autenticação do usuário
+function validateAuthentication(token) {
+  fetch("http://localhost:3000/users/validation", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Não foi possível validar a autenticação.");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if (data.isAuthenticated) {
+        updateLoginButton(data.name);
+        fetchNews();
+      } else {
+        removeAuthToken();
+      }
+    })
+    .catch((error) => {
+      console.error("Erro ao verificar autenticação:", error);
+    });
+}
+
+// Função para buscar notícias da categoria "Tecnologia"
+function fetchNews() {
+  fetch("http://localhost:3000/noticias/cat/Tecnologia", {
+    method: "GET",
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Não foi possível buscar notícias.");
+      }
+      return response.json();
+    })
+    .then((news) => {
+      console.log(news);
+      renderNewsCards(news);
+    })
+    .catch((error) => {
+      console.error("Erro ao buscar notícias:", error);
+    });
+}
+
+// Verifica se há um token de autenticação
+const token = localStorage.getItem("token");
+
+// Inicializa o aplicativo verificando a autenticação
+if (token) {
+  validateAuthentication(token);
+} else {
+  removeAuthToken();
+}
 window.addEventListener("scroll", () => {
   const navbar = document.getElementById("navbar");
   const navLinks = Array.from(document.getElementsByClassName("nav-link"));
@@ -134,3 +166,4 @@ ScrollReveal().reveal(".card", {
     x: 100,
   },
 });
+window.sr;

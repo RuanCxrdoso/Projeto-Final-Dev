@@ -8,7 +8,7 @@ router.get("/", newsController.findAll);
 router.post("/", upload.single("file"), newsController.create);
 
 router.get("/:id", newsController.findById);
-router.get("/categoria", newsController.findByCategorie);
+router.get("/cat/:categoria", newsController.findByCategorie);
 
 // router.get("/:id", newsController.findPerId);
 //router.post("/login", userController.login);

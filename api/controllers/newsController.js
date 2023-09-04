@@ -14,14 +14,14 @@ exports.findAll = async (req, res) => {
 exports.findByCategorie = async (req, res) => {
   const excludedCategories = ["Esporte", "Tecnologia", "Arte"];
   try {
-    const { categorie } = req.query;
-    if (categorie === "Outros") {
+    const { categoria } = req.params;
+    if (categoria === "Outros") {
       const news = await News.find({
         catergoria: { $nin: excludedCategories },
       });
       res.status(200).json(news);
     } else {
-      const news = await News.find({ catergoria: categorie });
+      const news = await News.find({ catergoria: categoria });
       res.status(200).json(news);
     }
   } catch (err) {
