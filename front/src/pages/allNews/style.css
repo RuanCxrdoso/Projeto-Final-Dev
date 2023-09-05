@@ -112,6 +112,7 @@ a {
 .card {
   visibility: hidden;
   width: 20rem;
+  height: 34rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
 }
 
@@ -399,7 +400,7 @@ a {
 
   .card {
     width: 19rem;
-    height: 35rem;
+    height: 34rem;
   }
 
   .content {
@@ -474,6 +475,7 @@ a {
 
   .card {
     width: 23rem;
+    height: 34rem;
   }
 
   .splide {
