@@ -12,40 +12,52 @@ function renderizarCards(noticias) {
 
     const imgBox = document.createElement("div");
     imgBox.className = "img-box";
-    const img = document.createElement("img");
-    img.src = noticia.src;
-    img.className = "card-img-top";
-    img.alt = noticia.title;
-    imgBox.appendChild(img);
 
-    const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
+    let url = "http://localhost:3000/uploads/" + noticia.src;
 
-    const titulo = document.createElement("h3");
-    titulo.textContent = noticia.title;
-    cardBody.appendChild(titulo);
+    fetch(url)
+      .then((resposta) => resposta.blob())
+      .then((imagem) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(imagem);
+        fetch(url)
+          .then((resposta) => resposta.blob())
+          .then((imagem) => {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(imagem); // Crie uma URL temporária para a imagem
+            img.className = "card-img-top";
+            img.alt = noticia.title;
+            imgBox.appendChild(img);
+          });
 
-    const data = document.createElement("p");
-    data.textContent = noticia.data;
-    data.className = "date";
-    cardBody.appendChild(data);
+        const cardBody = document.createElement("div");
+        cardBody.className = "card-body";
 
-    const link = document.createElement("a");
-    link.textContent = "Notícia Completa";
-    card.dataset.id = noticia._id; // Supondo que noticia.id contenha o ID único da notícia
-    card.addEventListener("click", () => {
-      const newsId = card.dataset.id; // Obtém o ID da notícia do atributo personalizado
-      const newsDetailURL = "/front/src/pages/news/news.html?id=" + newsId;
-      link.href = newsDetailURL; // Substitua pela URL completa da notícia
-      console.log(newsDetailURL);
-      //window.location.href = newsDetailURL; // Redireciona o usuário para a página de detalhes
-    });
-    cardBody.appendChild(link);
+        const titulo = document.createElement("h3");
+        titulo.textContent = noticia.title;
+        cardBody.appendChild(titulo);
 
-    card.appendChild(imgBox);
-    card.appendChild(cardBody);
+        const data = document.createElement("p");
+        data.textContent = noticia.data;
+        data.className = "date";
+        cardBody.appendChild(data);
 
-    cardsContainer.appendChild(card);
+        const link = document.createElement("a");
+        link.textContent = "Notícia Completa";
+        card.dataset.id = noticia._id; // Supondo que noticia.id contenha o ID único da notícia
+        card.addEventListener("click", () => {
+          const newsId = card.dataset.id; // Obtém o ID da notícia do atributo personalizado
+          const newsDetailURL = "/front/src/pages/news/news.html?id=" + newsId;
+          link.href = newsDetailURL; // Substitua pela URL completa da notícia
+          //window.location.href = newsDetailURL; // Redireciona o usuário para a página de detalhes
+        });
+        cardBody.appendChild(link);
+
+        card.appendChild(imgBox);
+        card.appendChild(cardBody);
+
+        cardsContainer.appendChild(card);
+      });
   });
 }
 
@@ -65,13 +77,18 @@ function renderItensAuth() {
           loginBtn.textContent = `${data.name}`;
           loginBtn.href = "/front/src/pages/profile/profile.html";
           fetch("http://localhost:3000/noticias")
-            .then((resposta) => resposta.json())
+            .then((resposta) => {
+              if (!resposta.ok) {
+                throw new Error(`Erro ao buscar notícias: ${resposta.status}`);
+              }
+              return resposta.json();
+            })
             .then((noticias) => {
-              console.log(noticias);
               renderizarCards(noticias);
             })
             .catch((erro) => {
               console.error("Erro:", erro);
+              // Lidar com o erro, por exemplo, mostrando uma mensagem de erro ao usuário
             });
         } else {
           localStorage.removeItem("token");

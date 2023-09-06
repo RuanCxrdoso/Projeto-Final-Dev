@@ -17,11 +17,13 @@ exports.findByCategorie = async (req, res) => {
     const { categoria } = req.params;
     if (categoria === "Outros") {
       const news = await News.find({
-        catergoria: { $nin: excludedCategories },
+        categoria: { $nin: excludedCategories },
       });
+
       res.status(200).json(news);
     } else {
-      const news = await News.find({ catergoria: categoria });
+      const news = await News.find({ categoria: categoria });
+
       res.status(200).json(news);
     }
   } catch (err) {
@@ -32,7 +34,7 @@ exports.findByCategorie = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { title, conteudo, coments, catergoria, data } = req.body;
+    const { title, conteudo, coments, categoria, data } = req.body;
     const file = req.file;
 
     if (!file) {
@@ -53,19 +55,13 @@ exports.create = async (req, res) => {
       }
       return res.status(422).json({ msg: "O conteudo é obrigatorio!" });
     }
-    if (!catergoria) {
+    if (!categoria) {
       if (req.file) {
         fs.unlinkSync(req.file.path);
       }
       return res
         .status(422)
-        .json({ msg: "É obrigatorio informar a catergoria" });
-    }
-    if (!data) {
-      if (req.file) {
-        fs.unlinkSync(req.file.path);
-      }
-      return res.status(422).json({ msg: "É obrigatorio informar a data" });
+        .json({ msg: "É obrigatorio informar a categoria" });
     }
 
     const newsExist = await News.findOne({ conteudo: conteudo });
@@ -78,11 +74,11 @@ exports.create = async (req, res) => {
     }
 
     const news = new News({
-      src: file.path.slice(76),
+      src: file.path.slice(85),
       title,
       conteudo,
       coments,
-      catergoria,
+      categoria,
       data,
     });
 

@@ -1,68 +1,60 @@
-const form = document.getElementById('registerForm')
-const password = document.getElementById('password')
-const passwordtwo = document.getElementById('passwordtwo')
+const form = document.getElementById("registerForm");
 
-form.addEventListener('submit', (ev) => {
-  ev.preventDefault()
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
 
-  const senha1 = password.value
-  const senha2 = passwordtwo.value
+  const senha1 = password.value;
+  const senha2 = passwordtwo.value;
 
   if (senha1 !== senha2) {
+    lancaErro(password, "As senhas devem ser iguais!", "passwordError");
+    return;
+  }
 
-    lancaErro(password, 'As senhas devem ser iguais !', 'small')
-    lancaErro(passwordtwo, 'As senhas devem ser iguais !', 'small2')
+  const name = form.name.value;
+  const email = form.email.value;
+  const senha = form.password.value;
 
-  } else if (senha1 === senha2) {
+  const dados = {
+    name,
+    email,
+    password: senha, // Certifique-se de usar o nome correto do campo
+    admin: false,
+  };
 
-    const formularioDados = new FormData(ev.target)
-
-    const name = formularioDados.get('name')
-    const email = formularioDados.get('email')
-    const senha = formularioDados.get('password')
-
-    const dados = {
-      name: name,
-      email: email,
-      senha: senha,
-      admin: false
-    }
-
-    fetch('https://localhost:3000/registro', { // aqui vai o caminho do back (?)
+  try {
+    const resposta = await fetch("https://localhost:3000/users", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(dados)
-    })
-      .then((resposta) => resposta.json())
-      .then((dados) => {
+      body: JSON.stringify(dados),
+    });
 
-        console.log(dados);
-      })
-      .catch((erro) => {
+    if (!resposta.ok) {
+      throw new Error(`Erro ao registrar usuário: ${resposta.status}`);
+    }
 
-        console.error("Erro:", erro);
-      });
+    const resultado = await resposta.json();
+    console.log(resultado);
 
-    removeErro(password, 'small')
-    removeErro(passwordtwo, 'small2')
-    form.reset()
+    removeErro(password, "passwordError");
+    form.reset();
+  } catch (erro) {
+    console.error("Erro:", erro);
   }
-})
+});
 
 function lancaErro(input, message, id) {
+  const small = document.getElementById(id);
 
-  const small = document.getElementById(id)
-
-  input.className = 'form-control erro'
-  small.innerText = message
+  input.classList.add("erro");
+  small.textContent = message;
 }
 
 function removeErro(input, id) {
+  const small = document.getElementById(id);
 
-  const small = document.getElementById(id)
-
-  input.className = 'form-control'
-  small.innerHTML = ''
+  input.classList.remove("erro");
+  small.textContent = "";
 }

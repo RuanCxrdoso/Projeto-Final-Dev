@@ -1,37 +1,41 @@
 // Função para lidar com o envio do formulário
-function lidarComEnvioFormulario(evento) {
+async function lidarComEnvioFormulario(evento) {
   evento.preventDefault(); // Impede o envio padrão do formulário
 
-  // Obter os dados do formulário
-  const formularioDados = new FormData(evento.target);
-  const email = formularioDados.get("email");
-  const senha = formularioDados.get("password");
+  try {
+    // Obter os dados do formulário
+    const formulario = evento.target;
+    const email = formulario.email.value;
+    const senha = formulario.password.value;
 
-  // Criar um objeto JSON com o email e a senha
-  const dados = {
-    email: email,
-    password: senha,
-  };
+    // Criar um objeto JSON com o email e a senha
+    const dados = { email, password: senha };
 
-  // Enviar os dados para a sua API usando fetch
-  fetch("http://localhost:3000/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(dados),
-  })
-    .then((resposta) => resposta.json())
-    .then((dados) => {
-      localStorage.setItem("token", dados.token);
-      console.log("Usuário logado com sucesso!");
-      // Redirecione o usuário para a página desejada após o login
-      window.location.href = "/front/src/index.html";
-    })
-    .catch((erro) => {
-      // Lidar com quaisquer erros que ocorreram durante o fetch
-      console.error("Erro:", erro);
+    console.log(JSON.stringify(dados));
+
+    // Enviar os dados para a sua API usando fetch
+    const resposta = await fetch("http://localhost:3000/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
     });
+
+    if (!resposta.ok) {
+      throw new Error(`Erro ao fazer login: ${resposta.status}`);
+    }
+
+    const dadosResposta = await resposta.json();
+    localStorage.setItem("token", dadosResposta.token);
+    console.log("Usuário logado com sucesso!");
+
+    // Redirecione o usuário para a página desejada após o login
+    window.location.href = "/front/src/index.html";
+  } catch (erro) {
+    // Lidar com quaisquer erros que ocorreram durante o processo
+    console.error("Erro:", erro);
+  }
 }
 
 // Adicionar um event listener para o evento "submit" do formulário

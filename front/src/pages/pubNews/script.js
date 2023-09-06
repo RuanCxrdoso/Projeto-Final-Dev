@@ -1,74 +1,75 @@
 const token = localStorage.getItem("token");
 
-function renderItensAuth() {
-  console.log(token);
-  if (token) {
-    fetch("http://localhost:3000/users/validation", {
+async function fetchUserData(token) {
+  try {
+    const response = await fetch("http://localhost:3000/users/validation", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`, // Enviar o token no cabeçalho Authorization
+        Authorization: `Bearer ${token}`,
       },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.isAuthenticated) {
-          const loginBtn = document.getElementById("loginBtn");
-          loginBtn.textContent = `${data.name}`;
-          loginBtn.href = "/front/src/pages/profile/profile.html";
-        }
-      })
-      .catch((error) => {
-        console.error("Erro ao verificar autenticação:", error);
-        // Lidar com erros, como redirecionar para uma página de erro
-      });
-  } else {
-    localStorage.removeItem("token");
-    window.location.href = "/front/src/";
+    });
+    const data = await response.json();
+
+    if (data.isAuthenticated) {
+      const loginBtn = document.getElementById("loginBtn");
+      loginBtn.textContent = `${data.name}`;
+      loginBtn.href = "/front/src/pages/profile/profile.html";
+    }
+  } catch (error) {
+    console.error("Erro ao verificar autenticação:", error);
+    // Lidar com erros, como redirecionar para uma página de erro
   }
 }
 
-renderItensAuth();
+function mapCategoriaValue(value) {
+  switch (value) {
+    case "1":
+      return "Esporte";
+    case "2":
+      return "Tecnologia";
+    case "3":
+      return "Arte";
+    default:
+      return "Outros";
+  }
+}
 
-function lidarComEnvioFormulario(ev) {
+async function handleSubmitForm(ev) {
   ev.preventDefault();
 
   const form = new FormData(ev.target);
-  const imagem = form.get("imagem");
-  const titulo = form.get("titulo");
-  const categoria = document.getElementById("categoria").value; // retorna o 'value' correspondente
-  const autor = form.get("autor");
+  const fileInput = document.querySelector("#file"); // Seleciona o input de arquivo pelo ID
+  const file = fileInput.files[0]; // Obtém o arquivo do input de arquivo
+  const title = form.get("title");
+  const categoria = mapCategoriaValue(form.get("categoria"));
   const conteudo = form.get("conteudo");
 
-  console.log(`
-  Imagem: ${imagem}\n
-  Título: ${titulo}\n
-  Categoria: ${categoria}\n
-  Autor: ${autor}\n
-  Conteúdo: ${conteudo}
-  `);
+  const dados = new FormData(); // Use FormData para lidar com envio de arquivo
+  dados.append("file", file); // Anexe o arquivo ao FormData
+  dados.append("title", title);
+  dados.append("categoria", categoria);
+  dados.append("conteudo", conteudo);
+  console.log(dados);
+  try {
+    const response = await fetch("http://localhost:3000/noticias", {
+      method: "POST",
+      body: dados, // Use o FormData diretamente como corpo da requisição
+    });
 
-  const dados = {
-    imagem: imagem,
-    titulo: titulo,
-    categoria: categoria,
-    autor: autor,
-    conteudo: conteudo,
-  };
-
-  fetch("https://localhost:3000/pubNews", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
-    },
-    body: JSON.stringify(dados),
-  })
-    .then((response) => response.json())
-    .then((dados) => console.log(dados))
-    .catch((err) => console.log(err));
+    const responseData = await response.json();
+    console.log(responseData);
+  } catch (err) {
+    console.error(err);
+  }
 
   document.querySelector("form").reset();
 }
 
-document
-  .querySelector("form")
-  .addEventListener("submit", lidarComEnvioFormulario);
+async function initialize() {
+  await fetchUserData(token);
+
+  const form = document.querySelector("form");
+  form.addEventListener("submit", handleSubmitForm);
+}
+
+initialize();

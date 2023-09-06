@@ -10,11 +10,20 @@ const postCommentBotao = document.getElementById("comment-btn");
 
 function renderizarDadosDaNoticia(news) {
   const tituloElement = document.getElementById("titulo");
-  const imagemElement = document.getElementById("top-img");
   const conteudoElement = document.getElementById("notice p");
+
   tituloElement.textContent = news.title; // Altere "title" para o campo correto no objeto de notícia
-  imagemElement.src = news.src; // Altere "imageURL" para o campo correto no objeto de notícia
   conteudoElement.textContent = news.conteudo; // Altere "content" para o campo correto no objeto de notícia
+
+  let url = "http://localhost:3000/uploads/" + news.src;
+
+  fetch(url)
+    .then((resposta) => resposta.blob())
+    .then((imagem) => {
+      const imagemElement = document.getElementById("top-img");
+      imagemElement.src = URL.createObjectURL(imagem);
+      console.log(imagemElement);
+    });
 }
 
 function renderizarComentarios(comentarios) {
