@@ -1,44 +1,34 @@
-// Função para criar elementos com classe e atributos
-function createElement(tagName, className, attributes = {}) {
-  const element = document.createElement(tagName);
-  element.className = className;
+const token = localStorage.getItem("token");
 
-  for (const attribute in attributes) {
-    element[attribute] = attributes[attribute];
-  }
-
-  return element;
-}
-
-// Função para renderizar os cards de notícias
-function renderNewsCards(news) {
-  const cardsContainer = document.querySelector(".cards-container");
-  cardsContainer.innerHTML = ""; // Limpa o conteúdo anterior da div
-
-  news.forEach((article) => {
-    const card = createNewsCard(article);
-    cardsContainer.appendChild(card);
-  });
-}
-
-// Função para criar um card de notícia
-function createNewsCard(article) {
-  const card = createElement("div", "card");
+function createCardElement(noticia) {
+  const card = document.createElement("div");
+  card.className = "card";
   card.style.visibility = "visible";
-  const imgBox = createElement("div", "img-box");
-  imgBox.appendChild(
-    createElement("img", "card-img-top", {
-      src: article.src,
-      alt: article.title,
-    })
-  );
 
-  const cardBody = createElement("div", "card-body");
-  cardBody.appendChild(createElement("h3", "", { textContent: article.title }));
-  cardBody.appendChild(
-    createElement("p", "date", { textContent: article.data })
-  );
-  cardBody.appendChild(createLink("Notícia Completa", article.link));
+  const imgBox = document.createElement("div");
+  imgBox.className = "img-box";
+
+  const img = document.createElement("img");
+  const url = "http://localhost:3000/uploads/" + noticia.src;
+
+  fetchImage(url).then((blob) => {
+    img.src = URL.createObjectURL(blob);
+    img.className = "card-img-top";
+    img.alt = noticia.title;
+    imgBox.appendChild(img);
+  });
+
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+
+  const title = createTextElement("h3", noticia.title);
+  const date = createTextElement("p", noticia.data, "date");
+  const newsDetailURL = "/front/src/pages/news/news.html?id=" + noticia._id;
+  const link = createLinkElement("Notícia Completa", newsDetailURL);
+
+  cardBody.appendChild(title);
+  cardBody.appendChild(date);
+  cardBody.appendChild(link);
 
   card.appendChild(imgBox);
   card.appendChild(cardBody);
@@ -46,85 +36,78 @@ function createNewsCard(article) {
   return card;
 }
 
-// Função para criar um link
-function createLink(text, href) {
-  const link = createElement("a", "", { textContent: text, href: href });
+function createTextElement(tagName, text, className = "") {
+  const element = document.createElement(tagName);
+  element.textContent = text;
+  if (className) {
+    element.className = className;
+  }
+  return element;
+}
+
+function createLinkElement(text, href) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.textContent = text;
   return link;
 }
 
-// Função para atualizar o botão de login com o nome do usuário autenticado
-function updateLoginButton(name) {
-  const loginBtn = document.getElementById("loginBtn");
-  loginBtn.textContent = name;
-  loginBtn.href = "/front/src/pages/profile/profile.html";
+function fetchImage(url) {
+  return fetch(url).then((response) => response.blob());
 }
 
-// Função para remover o token de autenticação
-function removeAuthToken() {
-  localStorage.removeItem("token");
+function renderNewsCards(noticias) {
+  const cardsContainer = document.querySelector(".cards-container");
+  cardsContainer.innerHTML = ""; // Limpa o conteúdo anterior da div
+
+  noticias.forEach((noticia) => {
+    const card = createCardElement(noticia);
+    cardsContainer.appendChild(card);
+  });
 }
 
-// Função para validar a autenticação do usuário
-function validateAuthentication(token) {
-  fetch("http://localhost:3000/users/validation", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Não foi possível validar a autenticação.");
-      }
-      return response.json();
+function renderItensAuth() {
+  if (token) {
+    fetch("http://localhost:3000/users/validation", {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     })
-    .then((data) => {
-      if (data.isAuthenticated) {
-        updateLoginButton(data.name);
-        fetchNews();
-      } else {
-        removeAuthToken();
-      }
-    })
-    .catch((error) => {
-      console.error("Erro ao verificar autenticação:", error);
-    });
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.isAuthenticated) {
+          const loginBtn = document.getElementById("loginBtn");
+          loginBtn.textContent = data.name;
+          loginBtn.href = "/front/src/pages/profile/profile.html";
+          fetch("http://localhost:3000/noticias/cat/Tecnologia", {
+            method: "GET",
+          })
+            .then((response) => response.json())
+            .then((noticias) => {
+              console.log(noticias);
+              renderNewsCards(noticias);
+            })
+            .catch((error) => {
+              console.error("Erro:", error);
+            });
+        } else {
+          localStorage.removeItem("token");
+        }
+      })
+      .catch((error) => {
+        console.error("Erro ao verificar autenticação:", error);
+      });
+  }
 }
 
-// Função para buscar notícias da categoria "Tecnologia"
-function fetchNews() {
-  fetch("http://localhost:3000/noticias/cat/Tecnologia", {
-    method: "GET",
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Não foi possível buscar notícias.");
-      }
-      return response.json();
-    })
-    .then((news) => {
-      console.log(news);
-      renderNewsCards(news);
-    })
-    .catch((error) => {
-      console.error("Erro ao buscar notícias:", error);
-    });
-}
+renderItensAuth();
 
-// Verifica se há um token de autenticação
-const token = localStorage.getItem("token");
-
-// Inicializa o aplicativo verificando a autenticação
-if (token) {
-  validateAuthentication(token);
-} else {
-  removeAuthToken();
-}
 window.addEventListener("scroll", () => {
   const navbar = document.getElementById("navbar");
   const navLinks = Array.from(document.getElementsByClassName("nav-link"));
   const scroll = window.scrollY;
-  let screenWidth = window.innerWidth;
+  const screenWidth = window.innerWidth;
 
   if (scroll > 10 && screenWidth > 992) {
     navbar.classList.add("scroll");
@@ -144,7 +127,7 @@ window.addEventListener("scroll", () => {
 
   const scrollBtn = document.getElementById("arrow-box");
 
-  if (window.scrollY > 500) {
+  if (window.scrollY > 300) {
     scrollBtn.style.opacity = "1";
     scrollBtn.style.transform = "translateX(.4rem)";
   } else {
@@ -166,4 +149,3 @@ ScrollReveal().reveal(".card", {
     x: 100,
   },
 });
-window.sr;

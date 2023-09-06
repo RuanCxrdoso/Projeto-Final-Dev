@@ -1,80 +1,95 @@
 const token = localStorage.getItem("token");
-//import validation from "./scripts/validation.js";
 
-function renderizarCards(noticias) {
-  const cardsContainer = document.querySelector(".cards-container");
-  cardsContainer.textContent = ""; // Limpa o conteúdo anterior da div
+function createCardElement(noticia) {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.visibility = "visible";
 
-  console.log(cardsContainer.textContent);
+  const imgBox = document.createElement("div");
+  imgBox.className = "img-box";
 
-  noticias.forEach((noticia) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style.visibility = "visible";
+  const img = document.createElement("img");
+  const url = "http://localhost:3000/uploads/" + noticia.src;
 
-    const imgBox = document.createElement("div");
-    imgBox.className = "img-box";
-    const img = document.createElement("img");
-    img.src = noticia.src;
+  fetchImage(url).then((blob) => {
+    img.src = URL.createObjectURL(blob);
     img.className = "card-img-top";
     img.alt = noticia.title;
     imgBox.appendChild(img);
-
-    const cardBody = document.createElement("div");
-    cardBody.className = "card-body";
-
-    const titulo = document.createElement("h3");
-    titulo.textContent = noticia.title;
-    cardBody.appendChild(titulo);
-
-    const data = document.createElement("p");
-    data.textContent = noticia.data;
-    data.className = "date";
-    cardBody.appendChild(data);
-
-    const link = document.createElement("a");
-    link.href = noticia.link; // Substitua pela URL completa da notícia
-    link.textContent = "Notícia Completa";
-    cardBody.appendChild(link);
-
-    card.appendChild(imgBox);
-    card.appendChild(cardBody);
-
-    cardsContainer.appendChild(card);
   });
-  console.log(cardsContainer.textContent);
+
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+
+  const title = createTextElement("h3", noticia.title);
+  const date = createTextElement("p", noticia.data, "date");
+  const newsDetailURL = "/front/src/pages/news/news.html?id=" + noticia._id;
+  const link = createLinkElement("Notícia Completa", newsDetailURL);
+
+  cardBody.appendChild(title);
+  cardBody.appendChild(date);
+  cardBody.appendChild(link);
+
+  card.appendChild(imgBox);
+  card.appendChild(cardBody);
+
+  return card;
 }
 
-const categoria = "Esporte"; // Coloque a categoria desejada aqui
-const url = `http://localhost:3000/noticias/categoria?categorie=${encodeURIComponent(
-  categoria
-)}`;
+function createTextElement(tagName, text, className = "") {
+  const element = document.createElement(tagName);
+  element.textContent = text;
+  if (className) {
+    element.className = className;
+  }
+  return element;
+}
+
+function createLinkElement(text, href) {
+  const link = document.createElement("a");
+  link.href = href;
+  link.textContent = text;
+  return link;
+}
+
+function fetchImage(url) {
+  return fetch(url).then((response) => response.blob());
+}
+
+function renderNewsCards(noticias) {
+  const cardsContainer = document.querySelector(".cards-container");
+  cardsContainer.innerHTML = ""; // Limpa o conteúdo anterior da div
+
+  noticias.forEach((noticia) => {
+    const card = createCardElement(noticia);
+    cardsContainer.appendChild(card);
+  });
+}
 
 function renderItensAuth() {
-  console.log(token);
   if (token) {
     fetch("http://localhost:3000/users/validation", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`, // Enviar o token no cabeçalho Authorization
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.isAuthenticated) {
           const loginBtn = document.getElementById("loginBtn");
-          loginBtn.textContent = `${data.name}`;
+          loginBtn.textContent = data.name;
           loginBtn.href = "/front/src/pages/profile/profile.html";
           fetch("http://localhost:3000/noticias/cat/Esporte", {
             method: "GET",
           })
-            .then((resposta) => resposta.json())
+            .then((response) => response.json())
             .then((noticias) => {
               console.log(noticias);
-              renderizarCards(noticias);
+              renderNewsCards(noticias);
             })
-            .catch((erro) => {
-              console.error("Erro:", erro);
+            .catch((error) => {
+              console.error("Erro:", error);
             });
         } else {
           localStorage.removeItem("token");
@@ -82,17 +97,17 @@ function renderItensAuth() {
       })
       .catch((error) => {
         console.error("Erro ao verificar autenticação:", error);
-        // Lidar com erros, como redirecionar para uma página de erro
       });
   }
 }
+
 renderItensAuth();
 
 window.addEventListener("scroll", () => {
   const navbar = document.getElementById("navbar");
   const navLinks = Array.from(document.getElementsByClassName("nav-link"));
   const scroll = window.scrollY;
-  let screenWidth = window.innerWidth;
+  const screenWidth = window.innerWidth;
 
   if (scroll > 10 && screenWidth > 992) {
     navbar.classList.add("scroll");

@@ -22,7 +22,6 @@ function renderizarDadosDaNoticia(news) {
     .then((imagem) => {
       const imagemElement = document.getElementById("top-img");
       imagemElement.src = URL.createObjectURL(imagem);
-      console.log(imagemElement);
     });
 }
 

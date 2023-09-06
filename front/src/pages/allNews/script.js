@@ -8,15 +8,26 @@ function renderizarCards(noticias) {
     const card = document.createElement("div");
     card.className = "card";
     card.style = "visibility : visible";
-
     const imgBox = document.createElement("div");
     imgBox.className = "img-box";
-    const img = document.createElement("img");
-    img.src = noticia.src;
-    img.className = "card-img-top";
-    img.alt = noticia.title;
-    imgBox.appendChild(img);
 
+    let url = "http://localhost:3000/uploads/" + noticia.src;
+
+    fetch(url)
+      .then((resposta) => resposta.blob())
+      .then((imagem) => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(imagem);
+        fetch(url)
+          .then((resposta) => resposta.blob())
+          .then((imagem) => {
+            const img = document.createElement("img");
+            img.src = URL.createObjectURL(imagem); // Crie uma URL temporária para a imagem
+            img.className = "card-img-top";
+            img.alt = noticia.title;
+            imgBox.appendChild(img);
+          });
+      });
     const cardBody = document.createElement("div");
     cardBody.className = "card-body";
 
