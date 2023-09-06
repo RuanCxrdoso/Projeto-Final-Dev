@@ -109,14 +109,17 @@ a {
 .card {
   visibility: hidden;
   width: 20rem;
+  height: 34rem;
   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.26);
 }
 
 .img-box {
+  height: 100%;
   overflow: hidden;
 }
 
 .card-img-top {
+  height: 100%;
   transition: .4s;
 }
 
