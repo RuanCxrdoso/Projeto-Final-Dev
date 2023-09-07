@@ -25,7 +25,8 @@ function createCard(noticia) {
   const imgBox = document.createElement("div");
   imgBox.className = "img-box";
 
-  const imgSrc = `http://localhost:3000/uploads/${noticia.src}`;
+  //const imgSrc = `https://api-ptdev.onrender.com/uploads/${noticia.src}`;
+  const imgSrc = `data:image/${noticia.extensionfile};base64,${noticia.src}`;
   const cardImageLink = document.createElement("a");
   cardImageLink.href = `/front/src/pages/news/news.html?id=${noticia._id}`;
   cardImageLink.appendChild(createImage(imgSrc, noticia.title));
@@ -74,6 +75,7 @@ function renderItens(fetchURL) {
       return resposta.json();
     })
     .then((noticias) => {
+      console.log(noticias);
       noticias.forEach((noticia) => {
         const card = createCard(noticia);
         cardsContainer.appendChild(card);
