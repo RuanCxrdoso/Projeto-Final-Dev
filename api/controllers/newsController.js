@@ -46,7 +46,7 @@ exports.findByCategorie = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { title, conteudo, coments, categoria, data } = req.body;
+    const { title, conteudo, coments, autor, categoria, data } = req.body;
     const file = req.file;
 
     if (!file) {
@@ -67,6 +67,10 @@ exports.create = async (req, res) => {
       }
       return res.status(422).json({ msg: "O conteudo é obrigatorio!" });
     }
+    if (!autor) {
+      res.status(422).json({ msg: "O autor é obrigatorio!" });
+    }
+
     if (!categoria) {
       if (req.file) {
         fs.unlinkSync(req.file.path);
@@ -76,7 +80,7 @@ exports.create = async (req, res) => {
         .json({ msg: "É obrigatorio informar a categoria" });
     }
 
-    const newsExist = await News.findOne({ conteudo: conteudo });
+    const newsExist = await News.findOne({ title: title });
 
     if (newsExist) {
       if (req.file) {
@@ -90,6 +94,7 @@ exports.create = async (req, res) => {
       title,
       conteudo,
       coments,
+      autor,
       categoria,
       data,
     });

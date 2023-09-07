@@ -43,6 +43,7 @@ async function handleSubmitForm(ev) {
   const fileInput = document.querySelector("#file"); // Seleciona o input de arquivo pelo ID
   const file = fileInput.files[0]; // Obtém o arquivo do input de arquivo
   const title = form.get("title");
+  const autor = form.get("autor");
   const categoria = mapCategoriaValue(form.get("categoria"));
   const conteudo = form.get("conteudo");
 
@@ -51,6 +52,7 @@ async function handleSubmitForm(ev) {
   dados.append("title", title);
   dados.append("categoria", categoria);
   dados.append("conteudo", conteudo);
+  dados.append("autor", autor);
   console.log(dados);
   try {
     const response = await fetch("http://localhost:3000/noticias", {

@@ -79,9 +79,9 @@ function renderItensAuth() {
       .then((response) => response.json())
       .then((data) => {
         if (data.isAuthenticated) {
-          localStorage.setItem("user", JSON.stringify(data));
+          localStorage.setItem("user", JSON.stringify(data.user));
           const loginBtn = document.getElementById("loginBtn");
-          loginBtn.textContent = data.name;
+          loginBtn.textContent = data.user.name;
           loginBtn.href = "/front/src/pages/profile/profile.html";
 
           fetch("http://localhost:3000/noticias/" + newsId)
@@ -108,15 +108,38 @@ function renderItensAuth() {
       .catch((error) => {
         console.error("Erro ao verificar autenticação:", error);
       });
+  } else {
+    fetch("http://localhost:3000/noticias/" + newsId)
+      .then((resposta) => resposta.json())
+      .then((noticia) => {
+        noticia = noticia[0];
+        renderizarDadosDaNoticia(noticia);
+      })
+      .catch((erro) => {
+        console.error("Erro ao buscar detalhes da notícia:", erro);
+      });
+    fetch("http://localhost:3000/comments/" + newsId)
+      .then((resposta) => resposta.json())
+      .then((comentarios) => {
+        renderizarComentarios(comentarios);
+      })
+      .catch((erro) => {
+        console.log("Erro ao buscar comentários:", erro);
+      });
   }
 }
 function publicComment() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (!user) {
+    alert("Você precisa estar logado para comentar!");
+    window.location.href = "/front/src/pages/autenticacao/login/login.html";
+    return;
+  }
   const comment = document.getElementById("floatingTextarea").value;
   const data = formatarData(new Date());
 
   // Obtenha o usuário do localStorage e converta para objeto JSON
-  const user = JSON.parse(localStorage.getItem("user"));
-  const author = user.id; // Acesse o ID do usuário diretamente
+  const author = user._id; // Acesse o ID do usuário diretamente
 
   const commentData = {
     texto: comment,
