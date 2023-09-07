@@ -19,19 +19,3 @@ export default function validation(token) {
       });
   }
 }
-
-const other = () => {
-  fetch("http://localhost:3000/noticias", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  })
-    .then((resposta) => resposta.json())
-    .then((dados) => {
-      // Lidar com os dados da resposta
-      console.log(dados);
-    })
-    .catch((erro) => {
-      console.error("Erro ao obter as notícias protegidas:", erro);
-    });
-};

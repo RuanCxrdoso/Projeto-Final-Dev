@@ -125,12 +125,14 @@ a {
   scale: 120%;
 }
 
+
+
 .img-box {
   height: 100%;
   overflow: hidden;
 }
 
-.card a {
+.category {
   text-decoration: none;
   color: black;
   background-color: #acacac;
@@ -140,7 +142,7 @@ a {
   transition: .4s;
 }
 
-.card a:hover {
+.category:hover {
   color: #bdbaba;
   background-color: rgb(20, 20, 20);
 }

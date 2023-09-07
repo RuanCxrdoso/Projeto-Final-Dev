@@ -4,6 +4,8 @@ const token = localStorage.getItem("token");
 document.getElementById("logout-button").addEventListener("click", () => {
   // Remove o token do localStorage
   localStorage.removeItem("token");
+  // Limpa o localStorage
+  localStorage.clear();
 
   // Redireciona o usuário para a página inicial
   window.location.href = "/front/src/index.html";
@@ -24,8 +26,13 @@ document.addEventListener("DOMContentLoaded", () => {
         .then((response) => response.json())
         .then((data) => {
           if (data.isAuthenticated) {
-            userNameElement.textContent = data.name;
-            userEmailElement.textContent = data.email;
+            console.log(data.user.isAdmin);
+            userNameElement.textContent = data.user.name;
+            userEmailElement.textContent = data.user.email;
+            if (!data.user.isAdmin) {
+              const pubNewsLink = document.getElementById("pubNews-btn");
+              pubNewsLink.remove();
+            }
           } else {
             localStorage.removeItem("token");
           }

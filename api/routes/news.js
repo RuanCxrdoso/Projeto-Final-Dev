@@ -2,10 +2,12 @@ const express = require("express");
 const router = express.Router();
 const newsController = require("../controllers/newsController");
 const upload = require("../middlewares/multer");
-const checkToken = require("../middlewares/checkToken");
+const AdminAuth = require("../middlewares/AdminAuth");
 
 router.get("/", newsController.findAll);
-router.post("/", upload.single("file"), newsController.create);
+router.get("/:quantity", newsController.findQuantity);
+router.post("/", upload.single("file"), AdminAuth, newsController.create);
+router.delete("/:id", newsController.deleteById);
 
 router.get("/:id", newsController.findById);
 router.get("/cat/:categoria", newsController.findByCategorie);

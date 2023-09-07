@@ -9,10 +9,12 @@ async function fetchUserData(token) {
       },
     });
     const data = await response.json();
-
+    if (!data.user.isAdmin) {
+      window.location.href = "/front/src/";
+    }
     if (data.isAuthenticated) {
       const loginBtn = document.getElementById("loginBtn");
-      loginBtn.textContent = `${data.name}`;
+      loginBtn.textContent = `${data.user.name}`;
       loginBtn.href = "/front/src/pages/profile/profile.html";
     }
   } catch (error) {
@@ -54,6 +56,9 @@ async function handleSubmitForm(ev) {
     const response = await fetch("http://localhost:3000/noticias", {
       method: "POST",
       body: dados, // Use o FormData diretamente como corpo da requisição
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
 
     const responseData = await response.json();

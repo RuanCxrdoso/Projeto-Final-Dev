@@ -1,4 +1,5 @@
 const Comments = require("../models/commentModel");
+const News = require("../models/newsModel");
 const User = require("../models/userModel");
 
 exports.findAll = async (req, res) => {
@@ -62,7 +63,13 @@ exports.create = async (req, res) => {
       publicacao,
     });
 
-    await comment.save();
+    const commentSave = await comment.save();
+    const commentId = commentSave._id;
+    News.findByIdAndUpdate(
+      publicacao,
+      { $push: { coments: commentId } },
+      { new: true, useFindAndModify: false }
+    ).exec();
 
     res.status(201).json({ msg: "Comentário cadastrado com sucesso!" });
   } catch (err) {

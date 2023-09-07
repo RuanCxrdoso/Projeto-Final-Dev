@@ -1,113 +1,128 @@
-const token = localStorage.getItem("token");
-import validation from "./scripts/validation.js";
+// Função para criar elementos de imagem
+function createImage(src, alt) {
+  const img = document.createElement("img");
+  img.src = src;
+  img.alt = alt;
+  return img;
+}
 
+// Função para criar elementos de texto
+function createTextElement(tagName, text, className) {
+  const element = document.createElement(tagName);
+  element.textContent = text;
+  if (className) {
+    element.className = className;
+  }
+  return element;
+}
+
+// Função para criar um card
+// Função para criar um card
+function createCard(noticia) {
+  const card = document.createElement("div");
+  card.className = "card";
+  card.style.width = "20rem";
+
+  const imgBox = document.createElement("div");
+  imgBox.className = "img-box";
+
+  const imgSrc = `http://localhost:3000/uploads/${noticia.src}`;
+  const cardImageLink = document.createElement("a");
+  cardImageLink.href = `/front/src/pages/news/news.html?id=${noticia._id}`;
+  cardImageLink.appendChild(createImage(imgSrc, noticia.title));
+
+  const cardBody = document.createElement("div");
+  cardBody.className = "card-body";
+
+  const titulo = createTextElement("h3", noticia.title);
+  const data = createTextElement("p", noticia.data, "date");
+
+  const categoria = createTextElement("p", noticia.categoria, "categoria");
+  categoria.classList.add("category"); // Adicione a classe desejada
+
+  imgBox.appendChild(cardImageLink);
+  cardBody.appendChild(titulo);
+  cardBody.appendChild(data);
+  cardBody.appendChild(categoria);
+
+  card.appendChild(imgBox);
+  card.appendChild(cardBody);
+
+  return card;
+}
+
+// Função para renderizar os cards
 function renderizarCards(noticias) {
   const cardsContainer = document.querySelector(".cards-container");
-  cardsContainer.textContent = ""; // Limpa o conteúdo anterior da div
+  cardsContainer.textContent = "";
 
   noticias.forEach((noticia) => {
-    const card = document.createElement("div");
-    card.className = "card";
-    card.style = "width: 20rem;";
-
-    const imgBox = document.createElement("div");
-    imgBox.className = "img-box";
-
-    let url = "http://localhost:3000/uploads/" + noticia.src;
-
-    fetch(url)
-      .then((resposta) => resposta.blob())
-      .then((imagem) => {
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(imagem);
-        fetch(url)
-          .then((resposta) => resposta.blob())
-          .then((imagem) => {
-            const img = document.createElement("img");
-            img.src = URL.createObjectURL(imagem); // Crie uma URL temporária para a imagem
-            img.className = "card-img-top";
-            img.alt = noticia.title;
-            imgBox.appendChild(img);
-          });
-
-        const cardBody = document.createElement("div");
-        cardBody.className = "card-body";
-
-        const titulo = document.createElement("h3");
-        titulo.textContent = noticia.title;
-        cardBody.appendChild(titulo);
-
-        const data = document.createElement("p");
-        data.textContent = noticia.data;
-        data.className = "date";
-        cardBody.appendChild(data);
-
-        const link = document.createElement("a");
-        link.textContent = "Notícia Completa";
-        card.dataset.id = noticia._id; // Supondo que noticia.id contenha o ID único da notícia
-        card.addEventListener("click", () => {
-          const newsId = card.dataset.id; // Obtém o ID da notícia do atributo personalizado
-          const newsDetailURL = "/front/src/pages/news/news.html?id=" + newsId;
-          link.href = newsDetailURL; // Substitua pela URL completa da notícia
-          //window.location.href = newsDetailURL; // Redireciona o usuário para a página de detalhes
-        });
-        cardBody.appendChild(link);
-
-        card.appendChild(imgBox);
-        card.appendChild(cardBody);
-
-        cardsContainer.appendChild(card);
-      });
+    const card = createCard(noticia);
+    cardsContainer.appendChild(card);
   });
 }
 
-function renderItensAuth() {
-  console.log(token);
+// Função para renderizar os itens (autenticado ou não)
+function renderItens() {
+  const cardsContainer = document.querySelector(".cards-container");
+  cardsContainer.textContent = "";
+
+  let fetchURL = "http://localhost:3000/noticias/4";
+
+  fetch(fetchURL)
+    .then((resposta) => {
+      if (!resposta.ok) {
+        throw new Error(`Erro ao buscar notícias: ${resposta.status}`);
+      }
+      return resposta.json();
+    })
+    .then((noticias) => {
+      noticias.forEach((noticia) => {
+        const card = createCard(noticia);
+        cardsContainer.appendChild(card);
+      });
+    })
+    .catch((erro) => {
+      console.error("Erro:", erro);
+    });
+}
+
+// Função para autenticação
+function auth(token) {
   if (token) {
     fetch("http://localhost:3000/users/validation", {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`, // Enviar o token no cabeçalho Authorization
+        Authorization: `Bearer ${token}`,
       },
     })
       .then((response) => response.json())
       .then((data) => {
         if (data.isAuthenticated) {
           const loginBtn = document.getElementById("loginBtn");
-          loginBtn.textContent = `${data.name}`;
+          loginBtn.textContent = data.name;
           loginBtn.href = "/front/src/pages/profile/profile.html";
-          fetch("http://localhost:3000/noticias")
-            .then((resposta) => {
-              if (!resposta.ok) {
-                throw new Error(`Erro ao buscar notícias: ${resposta.status}`);
-              }
-              return resposta.json();
-            })
-            .then((noticias) => {
-              renderizarCards(noticias);
-            })
-            .catch((erro) => {
-              console.error("Erro:", erro);
-              // Lidar com o erro, por exemplo, mostrando uma mensagem de erro ao usuário
-            });
+
+          renderItens(); // Chama renderItens com o token
         } else {
           localStorage.removeItem("token");
+          renderItens(); // Chama renderItens sem o token
         }
       })
       .catch((error) => {
         console.error("Erro ao verificar autenticação:", error);
-        // Lidar com erros, como redirecionar para uma página de erro
       });
+  } else {
+    renderItens(); // Chama renderItens sem o token
   }
 }
 
-renderItensAuth();
-
-window.addEventListener("scroll", () => {
+// Função para lidar com o scroll
+function handleScroll() {
   const navbar = document.getElementById("navbar");
   const navLinks = Array.from(document.getElementsByClassName("nav-link"));
   const scroll = window.scrollY;
-  let screenWidth = window.innerWidth;
+  const screenWidth = window.innerWidth;
 
   if (scroll > 10 && screenWidth > 992) {
     navbar.classList.add("scroll");
@@ -134,31 +149,34 @@ window.addEventListener("scroll", () => {
     scrollBtn.style.opacity = "0";
     scrollBtn.style.transform = "translateX(4rem)";
   }
-});
+}
 
-document.getElementById("arrow-box").addEventListener("click", function (e) {
+// Função para lidar com o clique no botão de scroll
+function handleScrollButtonClick(e) {
   e.preventDefault();
   window.scrollBy(0, -10000);
-});
+}
 
-window.sr = ScrollReveal({ reset: true });
+// Função para aplicar a animação de revelação
+function applyScrollReveal(selector) {
+  ScrollReveal().reveal(selector, {
+    delay: 300,
+    rotate: {
+      x: 100,
+    },
+  });
+}
+// ...
 
-ScrollReveal().reveal(".card", {
-  delay: 300,
-  rotate: {
-    x: 100,
-  },
-});
+// Chamadas de funções
+const token = localStorage.getItem("token");
+auth(token);
 
-ScrollReveal().reveal(".content-box", {
-  delay: 300,
-  rotate: {
-    x: 100,
-  },
-});
-ScrollReveal().reveal(".splide", {
-  delay: 300,
-  rotate: {
-    x: 100,
-  },
-});
+window.addEventListener("scroll", handleScroll);
+document
+  .getElementById("arrow-box")
+  .addEventListener("click", handleScrollButtonClick);
+
+applyScrollReveal(".card");
+applyScrollReveal(".content-box");
+applyScrollReveal(".splide");

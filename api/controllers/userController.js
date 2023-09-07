@@ -1,7 +1,7 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-
+const { userSignJwtAccessToken } = require("../config/jwt");
 //Register Route
 exports.create = async (req, res) => {
   try {
@@ -78,13 +78,10 @@ exports.login = async (req, res) => {
       return res.status(422).json({ msg: "Senha inválida" });
     }
 
-    const secret = process.env.SECRET;
-    const token = jwt.sign(
-      {
-        id: user._id,
-      },
-      secret
-    );
+    const userWithoutPass = { ...user.toObject() };
+    delete userWithoutPass.password;
+    const token = userSignJwtAccessToken(userWithoutPass);
+
     res
       .status(200)
       .json({ msg: "Autenticação reazlizada com sucesso!", token });
@@ -101,22 +98,19 @@ exports.validation = async (req, res) => {
     const token = req.headers.authorization.split(" ")[1];
     const secret = process.env.SECRET;
     const decoded = jwt.verify(token, secret);
-    const user = await User.findById(decoded.id);
+    const user = await User.findById(decoded._id);
 
     if (!user) {
       return res.status(422).json({ msg: "Usuario não encontrado!" });
     }
 
-    const name = user.name;
-    const email = user.email;
-    const id = user._id;
+    const userWithoutPass = { ...user.toObject() };
+    delete userWithoutPass.password;
 
     res.status(200).json({
       msg: "Usuario autenticado com sucesso!",
       isAuthenticated: true,
-      name,
-      email,
-      id,
+      user: userWithoutPass,
     });
   } catch (err) {
     console.log(err);
