@@ -11,10 +11,14 @@ const app = express();
 // Habilita o CORS para todas as rotas
 app.use(cors());
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 // models
 const newsRouter = require("./routes/news");
 const userRouter = require("./routes/user");
 const commentsRouter = require("./routes/comments");
+const uploadsRouter = require("./routes/uploads");
 
 // Config JSON response
 app.use(express.json());
@@ -25,27 +29,8 @@ app.use("/noticias", newsRouter);
 app.use("/users", userRouter);
 //Comments Routes
 app.use("/comments", commentsRouter);
-
-let caminho = path.join(__dirname, "../api/public/uploads");
-
-app.use("/uploads", express.static(path.join(caminho)));
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-// Rota GET para acessar os arquivos na pasta "/uploads"
-app.get("/uploads/:nomeDoArquivo", (req, res) => {
-  const { nomeDoArquivo } = req.params;
-  // Verifique se o arquivo existe na pasta "/uploads"
-  const arquivoPath = path.join(caminho, nomeDoArquivo);
-
-  res.sendFile(arquivoPath, (err) => {
-    if (err) {
-      // Se houver um erro ao enviar o arquivo, retorne um status 404 (não encontrado)
-      res.status(404).send("Arquivo não encontrado");
-    }
-  });
-});
+// Use o router de arquivos como uma rota separada
+app.use("/", uploadsRouter);
 
 // Open Route
 app.get("/", (req, res) => {
