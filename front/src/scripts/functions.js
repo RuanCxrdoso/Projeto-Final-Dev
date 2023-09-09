@@ -89,7 +89,7 @@ function renderItens(fetchURL) {
 // Função para autenticação
 function auth(token) {
   if (token) {
-    fetch("http://localhost:3000/users/validation", {
+    fetch("https://api-ptdev.onrender.com/users/validation", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

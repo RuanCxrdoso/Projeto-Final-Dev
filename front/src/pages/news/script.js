@@ -1,5 +1,8 @@
 const token = localStorage.getItem("token");
 
+const urlDomain = "https://api-ptdev.onrender.com";
+//const urlDomain = "http://localhost:3000";
+
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const newsId = urlParams.get("id");
@@ -15,7 +18,7 @@ function renderizarDadosDaNoticia(news) {
   tituloElement.textContent = news.title; // Altere "title" para o campo correto no objeto de notícia
   conteudoElement.textContent = news.conteudo; // Altere "content" para o campo correto no objeto de notícia
 
-  let url = "http://localhost:3000/uploads/" + news.src;
+  let url = `data:image/${news.extensionfile};base64,${news.src}`;
 
   fetch(url)
     .then((resposta) => resposta.blob())
@@ -70,7 +73,7 @@ function formatarData(dataString) {
 
 function renderItensAuth() {
   if (token) {
-    fetch("http://localhost:3000/users/validation", {
+    fetch(urlDomain + "/users/validation", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -84,7 +87,7 @@ function renderItensAuth() {
           loginBtn.textContent = data.user.name;
           loginBtn.href = "/front/src/pages/profile/profile.html";
 
-          fetch("http://localhost:3000/noticias/" + newsId)
+          fetch(urlDomain + "/noticias/" + newsId)
             .then((resposta) => resposta.json())
             .then((noticia) => {
               noticia = noticia[0];
@@ -93,7 +96,7 @@ function renderItensAuth() {
             .catch((erro) => {
               console.error("Erro ao buscar detalhes da notícia:", erro);
             });
-          fetch("http://localhost:3000/comments/" + newsId)
+          fetch(urlDomain + "/comments/" + newsId)
             .then((resposta) => resposta.json())
             .then((comentarios) => {
               renderizarComentarios(comentarios);
@@ -109,7 +112,7 @@ function renderItensAuth() {
         console.error("Erro ao verificar autenticação:", error);
       });
   } else {
-    fetch("http://localhost:3000/noticias/" + newsId)
+    fetch(urlDomain + "/noticias/" + newsId)
       .then((resposta) => resposta.json())
       .then((noticia) => {
         noticia = noticia[0];
@@ -118,7 +121,7 @@ function renderItensAuth() {
       .catch((erro) => {
         console.error("Erro ao buscar detalhes da notícia:", erro);
       });
-    fetch("http://localhost:3000/comments/" + newsId)
+    fetch(urlDomain + "/comments/" + newsId)
       .then((resposta) => resposta.json())
       .then((comentarios) => {
         renderizarComentarios(comentarios);
@@ -148,7 +151,7 @@ function publicComment() {
     publicacao: newsId,
   };
 
-  fetch("http://localhost:3000/comments", {
+  fetch(urlDomain + "/comments", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
