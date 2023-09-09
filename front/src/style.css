@@ -168,9 +168,9 @@ a {
   transform: skewY(3deg);
 }
 
-.content-box {
+/* .content-box {
   visibility: hidden;
-}
+} */
 
 .box-img {
   margin: 0 auto;
@@ -215,9 +215,9 @@ a {
   transform: skewY(3deg);
 }
 
-.splide {
+/* .splide {
   visibility: hidden;
-}
+} */
 
 .carousel-title {
   margin: 8rem auto;
@@ -247,6 +247,61 @@ a {
 .carousel-img img {
   width: 100%;
   border-radius: 50%;
+}
+
+.third-box {
+  background-color: #424242;
+  height: 25rem;
+  width: 90vw;
+  margin: 15rem 0 5rem -2rem;
+  /* margin-top: 15rem;
+  margin-left: -2rem;
+  margin-bottom: 5rem; */
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.left {
+  width: 40%;
+}
+
+.left div {
+  border-radius: 0 50% 50% 0;
+  height: 25rem;
+  overflow-y: hidden;
+}
+
+.newsLetter-img-box {
+  width: 100%;
+  height: 100%;
+}
+
+.right {
+  margin-top: 2rem;
+  margin-left: 10rem;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.right h3 {
+  color: #e9e9e9;
+}
+
+#newsLetterForm {
+  color: #e9e9e9;
+  height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5px;
+}
+
+#newsLetterForm label {
+  font-family: 'Lato', sans-serif;;
+}
+
+.assinar {
+  margin-top: .5rem;
 }
 
 .footer {
@@ -400,6 +455,7 @@ a {
   .carousel-title h3 {
     font-size: 1.5rem;
   }
+
   .splide {
     width: 100%;
     padding: 0 2.8rem;
@@ -411,6 +467,26 @@ a {
 
   .carousel-img {
     width: 4.5rem;
+  }
+
+  .third-box {
+    width: 100vw;
+    height: 100%;
+    flex-flow: column-reverse nowrap;
+  }
+
+  .left {
+   width: 100%;
+  }
+
+  .left div {
+    border-radius: 0;
+    height: 100%;
+  }
+
+  .right {
+    margin-left: 0;
+    padding: 1rem;
   }
 
   .footer {
@@ -519,6 +595,17 @@ a {
     flex-flow: column wrap;
   }
 
+  .third-box {
+    width: 100vw;
+  }
+
+  .left {
+    width: 50%;
+  }
+  .right {
+    margin-left: 1.3rem;
+  }
+
   .footer-top {
     width: 100%;
     gap: 40%;
@@ -583,6 +670,14 @@ a {
     padding-bottom: 1rem;
   }
 
+  .left {
+    width: 50%;
+  }
+
+  .right {
+    margin-left: 2.5rem;
+  }
+
   .footer-main {
     width: 90vw;
     margin: 0 auto;
@@ -590,5 +685,11 @@ a {
 
   .footer-contact {
     padding-right: 5rem;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1750px) {
+  .right {
+    margin-left: 4rem;
   }
 }
