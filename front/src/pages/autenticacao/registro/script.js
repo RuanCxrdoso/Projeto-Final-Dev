@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     try {
-      const resposta = await fetch("http://localhost:3000/users", {
+      const resposta = await fetch("https://api-ptdev.onrender.com/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       if (!resposta.ok) {
+        alert(
+          "Falha ao cadastrar usuário! Altere as credencias e tente novamente."
+        );
         throw new Error(`Erro ao registrar usuário: ${resposta.status}`);
       }
 
@@ -44,6 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert("Usuário cadastrado com sucesso!");
         window.location.href = "/front/src/pages/autenticacao/login/login.html";
       }
+
       removeErro(password, "passwordError");
       form.reset();
     } catch (erro) {

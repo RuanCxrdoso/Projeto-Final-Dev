@@ -244,7 +244,7 @@
               <input type="number" name="age" min="18" max="120" id="age">
               <label for="email">Email: </label>
               <input type="email" name="email" id="emailLetter">
-              <a href="#" class="btn btn-primary assinar">Assinar</a>
+              <a href="#" class="btn btn-primary assinar" onclick="verificarCampos()">Assinar</a>
             </form>
           </div>
         </div>
@@ -328,6 +328,30 @@
     } );
 
     splide.mount();
+  </script>
+
+  <script>
+     function verificarCampos() {
+        var name = document.getElementById("name").value;
+        var coName = document.getElementById("co-name").value;
+        var age = document.getElementById("age").value;
+        var email = document.getElementById("emailLetter").value;
+
+        if (name === "" || coName === "" || age === "" || email === "") {
+            alert("Por favor, preencha todos os campos do formulário.");
+        } else {
+            // Aqui você pode adicionar a lógica para enviar o email cadastrado.
+            // Isso pode ser feito com JavaScript, mas normalmente envolveria uma
+            // chamada de API para um serviço de envio de email. document.getElementById("name").value = "";
+            document.getElementById("name").value = "";
+            document.getElementById("co-name").value = "";
+            document.getElementById("age").value = "";
+            document.getElementById("emailLetter").value = "";
+
+
+            alert("Formulário enviado com sucesso!");
+        }
+    }
   </script>
 </body>
 </html>

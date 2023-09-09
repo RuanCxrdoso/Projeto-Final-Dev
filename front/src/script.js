@@ -11,7 +11,7 @@ const token = localStorage.getItem("token");
 auth(token);
 
 const fetchURL = "https://api-ptdev.onrender.com/noticias/4";
-//const fetchURL = "http://localhost:3000/noticias/4";
+//const fetchURL = "https://api-ptdev.onrender.com/noticias/4";
 
 renderItens(fetchURL);
 

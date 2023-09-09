@@ -1,7 +1,7 @@
 const token = localStorage.getItem("token");
 
 const urlDomain = "https://api-ptdev.onrender.com";
-//const urlDomain = "http://localhost:3000";
+//const urlDomain = "https://api-ptdev.onrender.com";
 
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -87,7 +87,7 @@ function renderItensAuth() {
           loginBtn.textContent = data.user.name;
           loginBtn.href = "/front/src/pages/profile/profile.html";
 
-          fetch(urlDomain + "/noticias/" + newsId)
+          fetch(urlDomain + "/noticias/id/" + newsId)
             .then((resposta) => resposta.json())
             .then((noticia) => {
               noticia = noticia[0];
@@ -131,17 +131,21 @@ function renderItensAuth() {
       });
   }
 }
-function publicComment() {
+async function publicComment() {
   const user = JSON.parse(localStorage.getItem("user"));
   if (!user) {
     alert("Você precisa estar logado para comentar!");
     window.location.href = "/front/src/pages/autenticacao/login/login.html";
     return;
   }
+
+  // Mostrar a tela de carregamento
+  const loadingScreen = document.getElementById("loading-screen");
+  loadingScreen.style.display = "block";
+
   const comment = document.getElementById("floatingTextarea").value;
   const data = formatarData(new Date());
 
-  // Obtenha o usuário do localStorage e converta para objeto JSON
   const author = user._id; // Acesse o ID do usuário diretamente
 
   const commentData = {
@@ -151,15 +155,25 @@ function publicComment() {
     publicacao: newsId,
   };
 
-  fetch(urlDomain + "/comments", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(commentData),
-  });
+  try {
+    await fetch(urlDomain + "/comments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(commentData),
+    });
 
-  window.location.reload();
+    // Ocultar a tela de carregamento após a requisição ser concluída
+    loadingScreen.style.display = "none";
+
+    window.location.reload();
+  } catch (error) {
+    console.error("Erro ao enviar o comentário:", error);
+
+    // Em caso de erro, também oculte a tela de carregamento
+    loadingScreen.style.display = "none";
+  }
 }
 
 renderItensAuth();

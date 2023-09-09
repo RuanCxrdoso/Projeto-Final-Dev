@@ -1,27 +1,11 @@
 const token = localStorage.getItem("token");
 
-async function fetchUserData(token) {
-  try {
-    const response = await fetch("https://api-ptdev.onrender.com/validation", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const data = await response.json();
-    if (!data.user.isAdmin) {
-      window.location.href = "/front/src/";
-    }
-    if (data.isAuthenticated) {
-      const loginBtn = document.getElementById("loginBtn");
-      loginBtn.textContent = `${data.user.name}`;
-      loginBtn.href = "/front/src/pages/profile/profile.html";
-    }
-  } catch (error) {
-    console.error("Erro ao verificar autenticação:", error);
-    // Lidar com erros, como redirecionar para uma página de erro
-  }
-}
+import {
+  auth,
+  renderItens,
+  handleScroll,
+  handleScrollButtonClick,
+} from "/front/src/scripts/functions.js";
 
 function mapCategoriaValue(value) {
   switch (value) {
@@ -65,15 +49,17 @@ async function handleSubmitForm(ev) {
 
     const responseData = await response.json();
     console.log(responseData);
+    alert("Notícia publicada com sucesso!");
   } catch (err) {
     console.error(err);
+    alert("Erro ao publicar notícia!");
   }
 
   document.querySelector("form").reset();
 }
 
 async function initialize() {
-  await fetchUserData(token);
+  auth(token);
 
   const form = document.querySelector("form");
   form.addEventListener("submit", handleSubmitForm);

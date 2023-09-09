@@ -14,16 +14,13 @@ async function lidarComEnvioFormulario(evento) {
     console.log(JSON.stringify(dados));
 
     // Enviar os dados para a sua API usando fetch
-    const resposta = await fetch(
-      "hhttps://api-ptdev.onrender.com/users/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(dados),
-      }
-    );
+    const resposta = await fetch("https://api-ptdev.onrender.com/users/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
+    });
 
     if (!resposta.ok) {
       throw new Error(`Erro ao fazer login: ${resposta.status}`);
