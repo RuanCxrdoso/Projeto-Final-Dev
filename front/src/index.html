@@ -13,11 +13,8 @@
   <!-- SPLIDE -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
 
-  <!-- ANIMATE -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-  <!-- SCROLL REVEAL -->
-  <script src="https://unpkg.com/scrollreveal@4.0.0/dist/scrollreveal.min.js"></script>
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
   <script src="script.js" type="module"></script>
@@ -76,7 +73,7 @@
   <main>
     <div class="main-box">
 
-      <h3 class="animate__animated animate__fadeInDown titulo">As últimas notícias você encontra aqui !</h3>
+      <h3 class="titulo" data-aos="fade-down" data-aos-duration="1000">As últimas notícias você encontra aqui !</h3>
 
       <div class="cards-container">
 
@@ -121,10 +118,12 @@
       <div class="second-box">
     
           <div class="content content-box">
-            <div class="animate__animated animate__fadeInLeft">
+            <div>
               <div class="box-img"><img src="../images/—Pngtree—vector globe icon_4186945.png" alt="logo" class="brand"></div>
-              <h3>True News, distruibuindo informações desde 2010</h3>
-              <p>
+              <div data-aos="fade-right" data-aos-duration="1000">
+                <h3>True News, distruibuindo informações desde 2010</h3>
+              </div>
+              <p data-aos="fade-up" data-aos-duration="1000">
                 '' Desde nossa fundação em 2010, a True News tem trilhado uma jornada impressionante. Comprometidos em fornecer informações precisas e imparciais, rapidamente nos destacamos como uma fonte confiável de notícias.
                 Nos primeiros anos, abraçamos a revolução digital, introduzindo abordagens inovadoras para a narrativa de notícias. Adotamos formatos interativos e envolventes, conquistando uma audiência crescente em meio à transformação do cenário midiático.
             
@@ -136,7 +135,7 @@
               </p>
               <div class="ceo">
                 
-                  <p>de Tal, Fulano - CEO True News</p>
+                  <p data-aos="fade-left" data-aos-duration="1000">de Tal, Fulano - CEO True News</p>
                 
               </div>
             </div>
@@ -144,11 +143,11 @@
 
         <div class="box-carousel">
 
-          <div class="carousel-title">
+          <div class="carousel-title" data-aos="fade-up" data-aos-duration="1000">
             <h3>Nossos maiores parceiros !</h3>
           </div>
 
-          <div class="splide">
+          <div class="splide" data-aos="fade-up" data-aos-duration="1000">
             <div class="splide__track">
               <div class="splide__list">
 
@@ -228,15 +227,15 @@
       <div class="third-box">
 
         <div class="left">
-          <div>
+          <div data-aos="fade-right" data-aos-duration="1000">
             <img src="../images/newsletter.jpg" alt="news letter" class="newsLetter-img-box">
           </div>
         </div>
 
         <div class="right">
           <div>
-            <h3>Assine a nossa NewsLetter !</h3>
-            <form id="newsLetterForm">
+            <h3 data-aos="fade-up" data-aos-duration="1000">Assine a nossa NewsLetter !</h3>
+            <form data-aos="fade-up" data-aos-duration="1000" id="newsLetterForm">
               <label for="name">Nome: </label>
               <input type="text" name="name" id="name">
               <label for="co-name">Sobrenome: </label>
@@ -314,6 +313,12 @@
   </footer>
   
   <!-- script do carrossel -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      // once: true
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
   <script>
     var splide = new Splide( '.splide', {

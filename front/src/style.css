@@ -168,9 +168,9 @@ a {
   transform: skewY(3deg);
 }
 
-.content-box {
+/* .content-box {
   visibility: hidden;
-}
+} */
 
 .box-img {
   margin: 0 auto;
@@ -215,9 +215,9 @@ a {
   transform: skewY(3deg);
 }
 
-.splide {
+/* .splide {
   visibility: hidden;
-}
+} */
 
 .carousel-title {
   margin: 8rem auto;
