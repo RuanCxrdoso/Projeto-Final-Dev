@@ -117,6 +117,7 @@ a {
 }
 
 .card img {
+  width: 100%;
   height: 100%;
   transition: .4s;
 }
@@ -374,6 +375,10 @@ a {
     background-color: #fff;
   }
 
+  .login-btn {
+    margin-top: .8rem !important;
+  }
+
   .main-box {
     border-radius: 0;
     width: 100vw;
@@ -475,6 +480,10 @@ a {
     padding-top: 6rem;
     background-image: none;
     background-color: #fff;
+  }
+
+  .login-btn {
+    margin-top: .8rem !important;
   }
 
   .main-box {
